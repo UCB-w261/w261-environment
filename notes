@@ -1,0 +1,21 @@
+add mrjob
+add some definition around ports and paths for host
+stopping and starting docker container does not persist the packages installed
+
+JAR /usr/lib/hadoop-mapreduce/hadoop-streaming.jar
+
+
+STEP 1
+docker run --hostname=quickstart.cloudera --privileged=true --name=cloudera -t -i -d -p 8889:8889 -p 8888:8888 -p 7180:7180 -p 8088:8088 -p 8042:8042 -p 19888:19888 -v /Users/jshanahan:/media/notebooks ankittharwani/mids-cloudera-hadoop:latest /usr/bin/docker-quickstart
+
+#NOTE  /usr/bin/docker-quickstart  start Hadoop Server in the ba
+
+STEP2:On command line
+docker exec -ti cloudera /bin/bash   #start Hadoop and login you into the clodera container 
+
+STEP 3: start Jupyter
+pyspark #starts jupyter 
+
+STEP 4: Then in your browser http://localhost:8889/
+
+
