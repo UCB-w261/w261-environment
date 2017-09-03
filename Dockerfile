@@ -61,14 +61,11 @@ ENV IPYTHON_OPTS "notebook --port 8889 --notebook-dir='/media/notebooks' --ip='*
 
 # Download custom Docker startup file
 RUN cd /root && \
-	# wget --quiet https://raw.githubusercontent.com/ankittharwani/mids-cloudera-hadoop/master/startup.sh && \
-	echo "###################### Starting Jupyter Notebook ######################" > startup.sh &&\
-	echo "source /opt/anaconda/bin/activate" >> startup.sh &&\
-	echo "jupyter notebook --port 8889 --notebook-dir='/media/notebooks' --ip='*' --no-browser --allow-root &" >> startup.sh &&\
+	wget --quiet https://raw.githubusercontent.com/UCB-w261/w261-environment/master/startup.sh && \
 	chmod 755 /root/startup.sh
 
 RUN cd /root && \
-	wget --quiet https://raw.githubusercontent.com/ankittharwani/mids-cloudera-hadoop/master/docker-quickstart && \
+	wget --quiet https://raw.githubusercontent.com/UCB-w261/w261-environment/master/docker-quickstart && \
 	chmod 755 /root/docker-quickstart && \
 	cat docker-quickstart > /usr/bin/docker-quickstart
 
