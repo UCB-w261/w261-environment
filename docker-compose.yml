@@ -1,16 +1,17 @@
 version: '2'
 services:
   quickstart.cloudera:
-    from repo
+    # from repo
     image: w261/w261-environment:latest
     # from local
     # image: w261:latest
     hostname: quickstart.cloudera
     privileged: true
-    command: bash -c "/root/startup.sh; /usr/bin/docker-quickstart; conda install -c conda-forge mrjob=0.5.5"
+    command: bash -c "/root/start-notebook-python.sh; /root/start-notebook-pyspark.sh;/usr/bin/docker-quickstart; conda install -c conda-forge mrjob=0.5.5"
     ports:
       - "8887:8888"   # Hue server
       - "8889:8889"   # jupyter
+      - "8890:8890"   # jupyter
       - "10020:10020" # mapreduce job history server
       - "8022:22"     # ssh
       - "7180:7180"   # Cloudera Manager
