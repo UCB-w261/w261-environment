@@ -16,7 +16,7 @@ Using Docker we can keep a fresh deployment of our Hadoop/Jupyter/Spark environm
 
 ## Installing Docker
 
-Download Docker Community Edition from ![alt text](https://docs.docker.com/engine/installation/ "Docker Installation")
+Download Docker Community Edition from [Docker](https://docs.docker.com/engine/installation/ "Docker Install Documentation")
 
 ## Pull the Class Image
 
