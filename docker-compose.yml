@@ -1,7 +1,7 @@
 version: '2'
 services:
   quickstart.cloudera:
-    image: ankittharwani/mids-cloudera-hadoop:latest
+    image: w261:latest
     hostname: quickstart.cloudera
     privileged: true
     command: bash -c "/root/startup.sh; /usr/bin/docker-quickstart; conda install -c conda-forge mrjob=0.5.5"
@@ -23,4 +23,4 @@ services:
     tty: true
     stdin_open: true
     volumes: 
-      - <your local shared directory here>:/media/notebooks
+      - C:\Users\winegarj\w261-environment:/media/notebooks

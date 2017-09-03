@@ -1,5 +1,5 @@
 FROM cloudera/quickstart
-MAINTAINER Ankit Tharwani
+MAINTAINER James Winegar
 
 # Install linux development tools
 RUN echo 'Install Development Tools'
@@ -57,12 +57,17 @@ RUN conda clean -p
 RUN echo 'Set environment variables'
 ENV PYSPARK_PYTHON /opt/anaconda/bin/python
 ENV IPYTHON 1
-ENV IPYTHON_OPTS "notebook --port 8889 --notebook-dir='/media/notebooks' --ip='*' --no-browser"
+ENV IPYTHON_OPTS "notebook --port 8889 --notebook-dir='/media/notebooks' --ip='*' --no-browser --allow-root"
 
 # Download custom Docker startup file
 RUN cd /root && \
-	wget --quiet https://raw.githubusercontent.com/ankittharwani/mids-cloudera-hadoop/master/startup.sh && \
-	chmod 755 /root/startup.sh && \
+	# wget --quiet https://raw.githubusercontent.com/ankittharwani/mids-cloudera-hadoop/master/startup.sh && \
+	echo "###################### Starting Jupyter Notebook ######################" > startup.sh &&\
+	echo "source /opt/anaconda/bin/activate" >> startup.sh &&\
+	echo "jupyter notebook --port 8889 --notebook-dir='/media/notebooks' --ip='*' --no-browser --allow-root &" >> startup.sh &&\
+	chmod 755 /root/startup.sh
+
+RUN cd /root && \
 	wget --quiet https://raw.githubusercontent.com/ankittharwani/mids-cloudera-hadoop/master/docker-quickstart && \
 	chmod 755 /root/docker-quickstart && \
 	cat docker-quickstart > /usr/bin/docker-quickstart
@@ -70,11 +75,5 @@ RUN cd /root && \
 RUN source /opt/anaconda/bin/activate
 RUN pip install mrjob
 
-# Add Tini
-# ENV TINI_VERSION v0.13.2
-# ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-# RUN chmod +x /tini
-# ENTRYPOINT ["/tini", "--"]
-
-# Run jupyter under Tini
-# CMD ["jupyter", "notebook", "--port=8889", "--notebook-dir='/media/notebooks'", "--no-browser", "--ip='*'", "&"]
+RUN conda install -c conda-forge -y jupyter_contrib_nbextensions
+RUN jupyter nbextension enable toc2/main
