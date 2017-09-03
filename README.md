@@ -81,6 +81,16 @@ services:
 
 If we review the bash scripts `startup.sh` we can see that the jupyter notebook is launched from the `/media/notebook` directory. This is very important for our deployment.
 
+## How to Use
+
+1. Install Docker (Restart as needed)
+2. Copy the contents of the `docker-compose.yml` file in this repo to somewhere on your computer with the same name
+3. Edit the `Volume` section to match where you want to store your notebooks/homework locally
+4. Open up a terminal or Powershell windows and change directory to where you stored your `docker-compose.yml` file
+5. Run `docker-compose up`
+6. Open your browser and go to `localhost:8889` for regular Python and MRJob and `localhost:8890` for PySpark
+
+
 ## General Issues
 
 Using python packages against HDFS
