@@ -1,152 +1,132 @@
-# MIDS W261 - Cloudera Hadoop on Docker
+# Docker FAQ
 
----
-This docker image consists of the Cloudera QuickStart image extended with miniconda, important python packages and Jupyter notebook configured with pyspark.
+## What is Docker? 
 
-## Running this image on your machine
+Docker is a container management platform for automating deployments of re-usable environemnets. 
 
-### Install Docker Engine
-* Before we start using the image, please make sure the Docker Engine is installed on your machine.
-* For instructions installing docker engine, refer to the link below:
-> https://docs.docker.com/engine/installation/
+## What are Containers? Containers vs VM
 
-* You can just stop at Step 1, i.e. "Install and Run Docker for Mac"
-<br /><br />
+Containers are a type of virtualization. They virtualize environments at the operating system level by sharing the base libraries. This removes the need for boot drives and hardware interfaces for each environment. This makes a container use much less resources than a virtual machine (VM) which can make environments more efficient because lack of duplication of resources.
 
-### Pull the Docker Image
-* Once you have the Docker Engine up and running, you can pull the **mids-cloudera-hadoop** image.
+![alt text](http://zdnet2.cbsistatic.com/hub/i/r/2017/05/08/af178c5a-64dd-4900-8447-3abd739757e3/resize/770xauto/78abd09a8d41c182a28118ac0465c914/docker-vm-container.png "Container vs VM")
 
-* You can navigate to the image at the Docker Hub link below:
-> https://hub.docker.com/r/ankittharwani/mids-cloudera-hadoop/
+## Why Docker?
 
-* Refer to the Tags to find the latest image - usually it is the **latest** tag itself.
+Using Docker we can keep a fresh deployment of our Hadoop/Jupyter/Spark environment readily avaliable. Taking around 2 minutes to remove and launch a new environment with the same initial configuration everytime.
 
-* On your machine, run the following command to pull the image:
-```
-docker pull ankittharwani/mids-cloudera-hadoop
-```
-<br />
+## Installing Docker
 
-### Create a Docker container with the pulled image
-Once you have the Docker image pulled, you can create a container in one of the following two ways:
+Download Docker Community Edition from ![alt text](https://docs.docker.com/engine/installation/ "Docker Installation")
 
-1. Create a container with the following command in your terminal:
+## Pull the Class Image
 
 ```
-docker run --hostname=quickstart.cloudera \
-           --privileged=true \
-           --name=cloudera \
-           -t -i -d \
-           -p 8889:8889 \
-           -p 8887:8888 \
-           -p 7180:7180 \
-           -p 8088:8088 \
-           -p 8042:8042 \
-           -p 10020:10020 \
-           -p 19888:19888 \
-           -v <host-path-to-mount-inside-container>:/media/notebooks \
-           ankittharwani/mids-cloudera-hadoop:latest \
-           bash -c '/root/startup.sh; /usr/bin/docker-quickstart'
-```
-> `<host-path-to-mount-inside-container>` is the path on your local drive which would be made available inside the docker. This will also be the default notebook directory within Jupyter.
-
-2. Use the docker-compose.yml file to start your container:
-
-```
-$ cd /path/to/docker-compose.yml
-$ docker-compose up -d
+docker pull w261/w261-environment
 ```
 
-The ports in the above terminal command may differ from those in the docker-compose.yml file. Feel free to add or remove ports as needed. For more details, you can refer to:
-> https://www.cloudera.com/documentation/enterprise/5-6-x/topics/quickstart_docker_container.html
+## Things to know
 
-* Once you've created the container and has been ran, you can check running status by:
+In the container for W261 we use docker-compose to build our container. Let's review the configuration file docker-compose.yml in its current state at the time of writing
+
 ```
-docker ps
-```
-<br />
-
-### Accessing the container
-
-* One of the configurations you can do on your host machine is to add a new hosts entry. This makes all reference to http://quickstart.cloudera/ resolve to http://localhost automatically.
-Add **127.0.0.1 quickstart.cloudera** to **/etc/hosts**
-
-* Important URLs:
-	* Jupyter Notebook: http://quickstart.cloudera:8889
-	* Resource Manager: http://quickstart.cloudera:8088
-	* Node Manager: http://quickstart.cloudera:8042
-	* MapReduce Job History Server: http://quickstart.cloudera:19888
-	* Cloudera Manager (if enabled): http://quickstart.cloudera:7180
-	* Hue (if enabled, details below): http://quickstart.cloudera:8887
-
-* Once the container has been created, you can login to it (launch bash terminal):
-```
-docker exec -ti cloudera /bin/bash
-```
-
-* You can also run a few hadoop commands to test everything is okay:
-```
-[root@quickstart /]# hdfs dfs -ls /
-Found 5 items
-drwxrwxrwx   - hdfs  supergroup          0 2016-04-06 02:26 /benchmarks
-drwxr-xr-x   - hbase supergroup          0 2017-01-24 20:49 /hbase
-drwxrwxrwt   - hdfs  supergroup          0 2017-01-24 20:50 /tmp
-drwxr-xr-x   - hdfs  supergroup          0 2016-04-06 02:27 /user
-drwxr-xr-x   - hdfs  supergroup          0 2016-04-06 02:27 /var
-```
-
-* With the current Cloudera Docker image, you should also be able to access Hue, which is a web based interface to Hive/Impala/HDFS etc. To access:
-
-> http://localhost:8887/
-
-You can replace **8887** with the **hue-port** configured above
-
-Username: cloudera
-
-Password: cloudera
-<br /><br />
-
-### Conda and Python Packages
-
-* The following python packages are installed under Conda:
-	* bokeh
-	* cython
-	* ipython
-	* ipython_genutils
-	* ipython-qtconsole
-	* ipython-notebook
-	* libpng
-	* jupyter
-	* mrjob
-	* nltk
-	* notebook
-	* numpy
-	* pandas
-	* pip
-	* scipy
-	* scikit-learn
-	* scikit-image
-	* setuptools
-	* sympy
-	* wheel
-	* unicodecsv
-	* ujson
-	* zlib
-
-* To use the miniconda environment outside of the notebook:
-```
-source /opt/anaconda/bin/activate
+version: '2'
+services:
+  quickstart.cloudera:
+    # from repo
+    image: w261/w261-environment:latest
+    # from local
+    # image: w261:latest
+    hostname: quickstart.cloudera
+    privileged: true
+    command: bash -c "/root/start-notebook-python.sh; /root/start-notebook-pyspark.sh;/usr/bin/docker-quickstart; conda install -c conda-forge mrjob=0.5.5"
+    ports:
+      - "8887:8888"   # Hue server
+      - "8889:8889"   # jupyter
+      - "8890:8890"   # jupyter
+      - "10020:10020" # mapreduce job history server
+      - "8022:22"     # ssh
+      - "7180:7180"   # Cloudera Manager
+      - "11000:11000" # Oozie
+      - "50070:50070" # HDFS REST Namenode
+      - "50075:50075" # hdfs REST Datanode
+      - "8088:8088"   # yarn resource manager webapp address
+      - "19888:19888" # mapreduce job history webapp address
+      - "8983:8983"   # Solr console
+      - "8032:8032"   # yarn resource manager access
+      - "8042:8042"   # yarn node manager
+      - "60010:60010" # hbase
+    tty: true
+    stdin_open: true
+    volumes: 
+      # windows example
+      # - C:\Users\winegarj\w261:/media/notebooks
+      # linux example
+      # - /home/winegarj/w261-repo:/media/notebooks
+      - C:\Users\winegarj\w261:/media/notebooks
 ```
 
+- version: this item says use v2 syntax
+- services: list of containers
+  - quickstart.cloudera: the name of a container, the label being quickstart.cloudera
+    - image: use this base container
+    - hostname: DNS name for the container
+    - privledged: allow access to other machines such as the local machine
+    - commands: run this commands on start
+    - ports: map ports so that services running on the container are accessible from the local computer
+      - remote port:local port
+    - tty: allow a shell to be initiated
+    - stdin_open: allow interactivity with the shell
+    - volumes: location to map from local computer to the docker container so they can share. 
+      - /local/path:/media/notebook
 
-* To use all python packages (esp. numpy) within hadoop:
-```
-Add the following parameter to Map Reduce Streaming commands:
--cmdenv PATH=/opt/anaconda/bin:$PATH
+If we review the bash scripts `startup.sh` we can see that the jupyter notebook is launched from the `/media/notebook` directory. This is very important for our deployment.
 
-Add the following parameter to MRJob commands:
---cmdenv PATH=/opt/anaconda/bin:$PATH
-```
+## General Issues
 
-* To use PySpark within Jupyter, below is a sample notebook:
-http://nbviewer.jupyter.org/urls/dl.dropbox.com/s/l4auzjcykgqirl0/PySpark%20Example.ipynb
+Using python packages against HDFS
+
+Add the following parameter to Map Reduce Streaming and MRJob commands:
+`-cmdenv PATH=/opt/anaconda/bin:$PATH`
+
+### Hostname mapping
+
+Apply the `quickstart.cloudera` alias for `127.0.0.1` aka `localhost`
+- Linux & Mac
+  1. Open Terminal
+  2. Open hostfile by running `sudo nano /etc/hosts`
+  3. Append the following line, then save: `127.0.0.1    quickstart.cloudera`
+  4. Refresh DNS with `sudo killall -HUP mDNSResponder`
+- Windows:
+  1. Open notepad as administrator (otherwise you'll not be able to save the file)
+  2. Open `C:\Windows\System32\drivers\etc\hosts` in notepad.  Note the file has no extension
+  3. Append the following line, then save: `127.0.0.1    quickstart.cloudera`
+  4. Refresh DNS by running `ipconfig /flushdns` in command prompt or powershell
+  
+### Minimum System Requirements for MIDS W261 Cloudera Hadoop Container
+
+Docker needs 2 CPUs and 4 GB of RAM to ensure resource managers don't crash during normal operation. 
+- Linux
+  1. By default Docker shares the same resources as the local computer.
+- Windows
+  1. Right click Docker in the notification area
+  2. Click Settings
+  3. Click Advanced
+  4. Slide Memory to 4096 MB
+- Mac OS
+  1. Click Docker in the clock(?) area
+  2. Click Settings
+  3. Click Advanced
+  4. Slide Memory to 4096 MB
+  
+## Linux Issues
+
+## Windows Issues
+
+- Windows 10 Pro/Education is required to run Docker on Windows. A free license of Windows 10 Education is avaliable to all students through [UCB Software Central](https://software.berkeley.edu/operating-systems#Microsoft)
+
+## Mac Issues
+
+- Macs require a computer capable of virtualization to test this run `sysctl kern.hv_support` in a terminal.
+  - If 1 then good to go
+  - If 0 then you need a new computer
+
