@@ -132,7 +132,14 @@ Docker needs 2 CPUs and 4 GB of RAM to ensure resource managers don't crash duri
 
 ## Windows Issues
 
+### Minimum OS requirement
+
 - Windows 10 Pro/Education is required to run Docker on Windows. A free license of Windows 10 Education is avaliable to all students through [UCB Software Central](https://software.berkeley.edu/operating-systems#Microsoft)
+
+### Auto-save/Overwrite Issues
+
+- https://github.com/jupyter/notebook/issues/484
+This has been addressed with Jupyter 5.1.0 which is being used for latest build of the container.
 
 ## Mac Issues
 
