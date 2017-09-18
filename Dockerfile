@@ -53,7 +53,6 @@ RUN conda install ipython_genutils
 RUN conda install ipython-qtconsole
 RUN conda install ipython-notebook
 RUN conda install libpng
-RUN conda install notebook
 RUN conda install numpy
 RUN conda install pandas
 RUN conda install scipy
@@ -70,7 +69,7 @@ RUN conda install unicodecsv
 RUN conda install ujson
 RUN conda install zlib
 RUN conda update --all
-RUN conda install -c conda-forge -y jupyter_contrib_nbextensions
+RUN conda install -c conda-forge -y notebook jupyter_contrib_nbextensions
 RUN conda clean -t
 RUN conda clean -p
 
