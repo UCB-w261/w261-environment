@@ -10,7 +10,7 @@ usage () {
    echo "How to use:";
    echo "    Initial setup: ./runner.sh -s -p <port>";
    echo "    Initial setup and run: ./runner.sh -sr -p <port>";
-   echo "    Initial setup: ./runner.sh -r";
+   echo "    Run Notebook environment after setup: ./runner.sh -r";
 }
 
 # option handler
