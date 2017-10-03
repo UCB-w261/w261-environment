@@ -2,12 +2,12 @@ version: '2'
 services:
   quickstart.cloudera:
     # from repo
-    image: w261/w261-environment:latest
+    #image: w261/w261-environment:latest
     # from local
-    # image: w261:latest
+    image: w261:latest
     hostname: quickstart.cloudera
     privileged: true
-    command: bash -c "/root/start-notebook-python.sh; /root/start-notebook-pyspark.sh;/usr/bin/docker-quickstart; conda install -c conda-forge mrjob=0.5.5"
+    command: bash -c "/root/start-notebook-pyspark.sh;/usr/bin/docker-quickstart;"
     ports:
       - "8887:8888"   # Hue server
       - "8889:8889"   # jupyter
@@ -31,4 +31,4 @@ services:
       # - C:\Users\winegarj\w261:/media/notebooks
       # linux example
       # - /home/winegarj/w261-repo:/media/notebooks
-      - C:\Users\winegarj\w261:/media/notebooks
+      - C:\Users\jwinegar\w261:/media/notebooks
