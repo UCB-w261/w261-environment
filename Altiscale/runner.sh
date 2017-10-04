@@ -71,13 +71,15 @@ if [ "$SETUP" -eq "1" ]; then
     echo "Creating Altiscale Jupyter kernels"
     /mnt/ephemeral1/jupyter/new_alti-jupyter.sh -s
     source activate py27
-    echo "Installing mrjob"
+    echo "Installing python packages"
     conda install -c conda-forge mrjob -y
+    conda install nb_conda -y
     echo "Configuring Jupyter Notebook environment"
 
     echo "c.NotebookApp.ip = '*'" > ~/.jupyter/jupyter_notebook_config.py
     echo "c.NotebookApp.port = $PORT" >> ~/.jupyter/jupyter_notebook_config.py
     echo "c.NotebookApp.token = ''" >>  ~/.jupyter/jupyter_notebook_config.py
+    wget --quiet https://raw.githubusercontent.com/UCB-w261/w261-environment/master/Altiscale/AltiscaleExample.ipynb -O AltiscaleExample.ipynb
 fi
 
 if [ "$RUN" -eq "1" ]; then
