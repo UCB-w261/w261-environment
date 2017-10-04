@@ -42,7 +42,6 @@ services:
     ports:
       - "8887:8888"   # Hue server
       - "8889:8889"   # jupyter
-      - "8890:8890"   # jupyter
       - "10020:10020" # mapreduce job history server
       - "8022:22"     # ssh
       - "7180:7180"   # Cloudera Manager
@@ -88,8 +87,8 @@ If we review the bash scripts `startup.sh` we can see that the jupyter notebook 
 3. Edit the `Volume` section to match where you want to store your notebooks/homework locally
 4. Open up a terminal or Powershell windows and change directory to where you stored your `docker-compose.yml` file
 5. Run `docker-compose up`
-6. Open your browser and go to `localhost:8889` for regular Python and MRJob and `localhost:8890` for PySpark
-
+6. Open your browser and go to `localhost:8889` for regular Python, MRJob, and Pyspark
+7. If using spark a sparkContext is automatically defined during initialization, in the `sc` variable
 
 ## General Issues
 
