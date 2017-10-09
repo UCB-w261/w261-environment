@@ -74,6 +74,8 @@ if [ "$SETUP" -eq "1" ]; then
     echo "Installing python packages"
     conda install -c conda-forge mrjob -y
     conda install nb_conda -y
+    conda install -c conda-forge -y notebook jupyter_contrib_nbextensions
+    jupyter nbextension enable toc2/main
     echo "Configuring Jupyter Notebook environment"
 
     echo "c.NotebookApp.ip = '*'" > ~/.jupyter/jupyter_notebook_config.py
