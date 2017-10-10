@@ -1,5 +1,12 @@
 Altiscale
 =========
+https://documentation.altiscale.com/configure-ssh-from-mac-linux   
+- Generate a SSH key pair
+- Upload your Public Key to the Big Data Services Portal
+- Set your SSH Configuration
+- Download the Big Data Services's PAC file
+- Configure your system for Proxy Auto Configuration
+
 
 SSH Setup
 ---------
