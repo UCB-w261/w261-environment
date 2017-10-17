@@ -96,6 +96,9 @@ if [ "$SETUP" -eq "1" ]; then
     echo "runners:" > ~/.mrjob.conf
     echo "  hadoop:" >> ~/.mrjob.conf
     echo "    py_files: hdfs:///user/$USERNAME/virtualenv/$ENV_NAME.zip" >> ~/.mrjob.conf
+    echo "    python_bin: python_bin: /opt/rh/python27/root/usr/bin/python2.7" >> ~/.mrjob.conf
+    echo "    cmdenv:" >> ~/.mrjob.conf
+    echo "      LD_LIBRARY_PATH: /opt/rh/python27/root/usr/lib64" >> ~/.mrjob.conf
     echo "    cleanup_on_failure: ALL" >> ~/.mrjob.conf
     echo "  local:" >> ~/.mrjob.conf
     echo "    cleanup_on_failure: ALL" >> ~/.mrjob.conf
