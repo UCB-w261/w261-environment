@@ -126,6 +126,32 @@ Docker needs 2 CPUs and 4 GB of RAM to ensure resource managers don't crash duri
   2. Click Settings
   3. Click Advanced
   4. Slide Memory to 4096 MB
+
+### Using Spark inside the notebook
+
+When trying to run pyspark code in a Jupyter notebook launched from the class environment container, you may encounter errors like this:
+
+```
+NameError: name 'sc' is not defined
+```
+
+or 
+
+```
+ValueError: Cannot run multiple SparkContexts at once;
+```
+
+To avoid both of these and still use examples you find in the [pyspark docs](https://spark.apache.org/docs/latest/rdd-programming-guide.html#resilient-distributed-datasets-rdds), where the Spark Context is always referred to as `sc`, add this line to your code:
+
+```
+sc = SparkContext.getOrCreate(conf)
+```
+
+Note that `conf` is a `SparkConf` instance and will already be available in the container. You can inspect it by running the following:
+
+```
+conf.getAll()
+```
   
 ## Linux Issues
 
