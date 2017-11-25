@@ -24,11 +24,12 @@ services:
       - "8032:8032"   # yarn resource manager access
       - "8042:8042"   # yarn node manager
       - "60010:60010" # hbase
+      - "4040:4040"   # Spark UI
     tty: true
     stdin_open: true
     volumes: 
       # windows example
       # - C:\Users\winegarj\w261:/media/notebooks
       # linux example
-      # - /home/winegarj/w261-repo:/media/notebooks
-      - C:\Users\jwinegar\w261:/media/notebooks
+      - /home/jameswine/notebooks:/media/notebooks
+      #- C:\Users\jwinegar\w261:/media/notebooks
