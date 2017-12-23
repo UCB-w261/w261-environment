@@ -8,7 +8,7 @@ RUN yum clean all && \
     yum install -y --quiet wget && \
     yum clean all
 
-ENV SPARK_VERSION=2.2.0
+ENV SPARK_VERSION=2.2.1
 ENV HADOOP_VERSION=2.7
 ENV ANACONDA_VERSION=5.0.1
 # Install Java and Spark and Anaconda
@@ -34,9 +34,13 @@ RUN conda update conda && \
     cython numpy pandas scipy nltk scikit-learn scikit-image sympy \
     ipython ipython_genutils ipython-qtconsole ipython-notebook jupyter \
     libpng unicodecsv ujson zlib && \
-    conda install -c conda-forge -y mrjob pyspark notebook jupyter_contrib_nbextensions && \
+    conda install -c conda-forge -y mrjob notebook jupyter_contrib_nbextensions jupyterlab && \
     jupyter nbextension enable toc2/main && \
     conda clean -tp -y
+
+ENV SPARK_HOME=/opt/spark
+RUN cd $SPARK_HOME/python &&\
+      python setup.py install
 
 # Download custom Docker startup file
 RUN mkdir -p /root/.jupyter
@@ -49,5 +53,6 @@ RUN chmod 755 /root/start-notebook.sh && \
 
 ENV PYSPARK_PYTHON=/opt/anaconda/bin/python
 ENV JAVA_HOME=/usr/java/jdk1.8.0_131
-ENV SPARK_HOME=/opt/spark
 ENV PATH=$SPARK_HOME/bin:$SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:$PATH
+# RUN conda install networkx
+# ENV PYSPARK_SUBMIT_ARGS="--packages graphframes:graphframes:0.5.0-spark2.2"
