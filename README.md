@@ -35,10 +35,10 @@ services:
     # from repo
     image: w261/w261-environment:latest
     # from local
-    # image: w261:latest
+    #image: w261:latest
     hostname: quickstart.cloudera
     privileged: true
-    command: bash -c "/root/start-notebook-python.sh; /root/start-notebook-pyspark.sh;/usr/bin/docker-quickstart; conda install -c conda-forge mrjob=0.5.5"
+    command: bash -c "/root/start-notebook.sh;/usr/bin/docker-quickstart"
     ports:
       - "8887:8888"   # Hue server
       - "8889:8889"   # jupyter
@@ -54,14 +54,16 @@ services:
       - "8032:8032"   # yarn resource manager access
       - "8042:8042"   # yarn node manager
       - "60010:60010" # hbase
+      - "4040:4040"   # Spark UI
+      - "8080:8080"   # Hadoop Job Tracker
     tty: true
     stdin_open: true
     volumes: 
       # windows example
       # - C:\Users\winegarj\w261:/media/notebooks
       # linux example
-      # - /home/winegarj/w261-repo:/media/notebooks
-      - C:\Users\winegarj\w261:/media/notebooks
+      #- /home/jameswine/notebooks:/media/notebooks
+      - C:\Users\jwinegar\w261:/media/notebooks
 ```
 
 - version: this item says use v2 syntax
