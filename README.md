@@ -131,30 +131,22 @@ Docker needs 2 CPUs and 4 GB of RAM to ensure resource managers don't crash duri
 
 ### Using Spark inside the notebook
 
-When trying to run pyspark code in a Jupyter notebook launched from the class environment container, you may encounter errors like this:
-
 ```
-NameError: name 'sc' is not defined
-```
-
-or 
-
-```
-ValueError: Cannot run multiple SparkContexts at once;
-```
-
-To avoid both of these and still use examples you find in the [pyspark docs](https://spark.apache.org/docs/latest/rdd-programming-guide.html#resilient-distributed-datasets-rdds), where the Spark Context is always referred to as `sc`, add this line to your code:
-
-```
-sc = SparkContext.getOrCreate(conf)
+from pyspark.sql import SparkSession
+app_name = "example_notebook"
+master = "local[*]"
+spark = SparkSession\
+        .builder\
+        .appName(app_name)\
+        .master(master)\
+        .getOrCreate()
+sc = spark.sparkContext
 ```
 
-Note that `conf` is a `SparkConf` instance and will already be available in the container. You can inspect it by running the following:
+`spark` is the general session manager for dataframes and the newer style introduced in Spark 2.0
 
-```
-conf.getAll()
-```
-  
+`sc` is a Spark context sets up internal services and establishes a connection to a Spark execution environment.
+
 ## Linux Issues
 
 ## Windows Issues
