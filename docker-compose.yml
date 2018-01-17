@@ -1,11 +1,8 @@
-version: '2'
+version: '3'
 services:
   quickstart.cloudera:
-    # from repo
     image: w261/w261-environment:latest
-    # from local
-    #image: w261:latest
-    hostname: quickstart.cloudera
+    hostname: docker.w261
     privileged: true
     command: bash -c "/root/start-notebook.sh;/usr/bin/docker-quickstart"
     ports:
@@ -28,8 +25,4 @@ services:
     tty: true
     stdin_open: true
     volumes: 
-      # windows example
-      # - C:\Users\winegarj\w261:/media/notebooks
-      # linux example
-      #- /home/jameswine/notebooks:/media/notebooks
-      - C:\Users\jwinegar\w261:/media/notebooks
+      - .:/media/notebooks
