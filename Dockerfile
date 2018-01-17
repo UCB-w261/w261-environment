@@ -41,7 +41,6 @@ RUN conda update conda && \
 	pip install --no-cache-dir bash_kernel && \
     python -m bash_kernel.install
 
-
 RUN cd $SPARK_HOME/python &&\
       python setup.py install
 
@@ -49,6 +48,7 @@ RUN cd $SPARK_HOME/python &&\
 RUN mkdir -p /root/.jupyter
 COPY docker/jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
 COPY docker/themes.jupyterlab-settings /root/.jupyter/lab/user-settings/\@jupyterlab/apputils-extension/
+COPY docker/ipython_config.py /root/.ipython/profile_default/ipython_config.py
 COPY docker/start-notebook.sh /root/start-notebook.sh
 COPY docker/docker-quickstart /usr/bin/docker-quickstart
 COPY docker/spark-defaults.conf /etc/spark/conf.dist/spark-defaults.conf
