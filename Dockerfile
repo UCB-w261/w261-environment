@@ -56,5 +56,6 @@ RUN chmod 755 /root/start-notebook.sh && \
     chmod 755 /usr/bin/docker-quickstart
 
 ENV PYSPARK_PYTHON=/opt/anaconda/bin/python
+ENV SHELL=bash
 ENV JAVA_HOME=/usr/java/jdk1.8.0_131
 ENV PATH=$SPARK_HOME/bin:$SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:$PATH
