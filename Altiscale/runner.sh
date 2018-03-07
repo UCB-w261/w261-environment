@@ -73,13 +73,8 @@ if [ "$SETUP" -eq "1" ]; then
     /mnt/ephemeral1/jupyter/new_alti-jupyter.sh -s
     source activate $ENV_NAME
     echo "Installing python packages"
-    conda install -c conda-forge mrjob -y
-    conda install nb_conda -y
-    conda install numpy -y
-    conda install matplotlib -y
-    conda install nltk -y
-    conda install -c conda-forge -y notebook jupyter_contrib_nbextensions
-    jupyter nbextension enable toc2/main
+    conda install -c conda-forge -y mrjob jupyterlab
+    conda install -y nb_conda numpy matplotlib nltk
     echo "Configuring Jupyter Notebook environment"
     echo "c.NotebookApp.ip = '*'" > ~/.jupyter/jupyter_notebook_config.py
     echo "c.NotebookApp.port = $PORT" >> ~/.jupyter/jupyter_notebook_config.py
