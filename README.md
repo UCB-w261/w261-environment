@@ -26,17 +26,14 @@ docker pull w261/w261-environment
 
 ## Things to know
 
-In the container for W261 we use docker-compose to build our container. Let's review the configuration file docker-compose.yml in its current state at the time of writing
+In the container for W261 we use docker-compose to build our container. Let's review the configuration file docker-compose.yml in its current state at the time of writing. Please use the commited file in repo since it will always be upto date.
 
 ```
-version: '2'
+version: '3'
 services:
   quickstart.cloudera:
-    # from repo
     image: w261/w261-environment:latest
-    # from local
-    #image: w261:latest
-    hostname: quickstart.cloudera
+    hostname: docker.w261
     privileged: true
     command: bash -c "/root/start-notebook.sh;/usr/bin/docker-quickstart"
     ports:
@@ -59,11 +56,7 @@ services:
     tty: true
     stdin_open: true
     volumes: 
-      # windows example
-      # - C:\Users\winegarj\w261:/media/notebooks
-      # linux example
-      #- /home/jameswine/notebooks:/media/notebooks
-      - C:\Users\jwinegar\w261:/media/notebooks
+      - .:/media/notebooks
 ```
 
 - version: this item says use v2 syntax
@@ -101,16 +94,16 @@ Add the following parameter to Map Reduce Streaming and MRJob commands:
 
 ### Hostname mapping
 
-Apply the `quickstart.cloudera` alias for `127.0.0.1` aka `localhost`
+Apply the `docker.w261` alias for `127.0.0.1` aka `localhost`
 - Linux & Mac
   1. Open Terminal
   2. Open hostfile by running `sudo nano /etc/hosts`
-  3. Append the following line, then save: `127.0.0.1    quickstart.cloudera`
+  3. Append the following line, then save: `127.0.0.1    docker.w261`
   4. Refresh DNS with `sudo killall -HUP mDNSResponder`
 - Windows:
   1. Open notepad as administrator (otherwise you'll not be able to save the file)
   2. Open `C:\Windows\System32\drivers\etc\hosts` in notepad.  Note the file has no extension
-  3. Append the following line, then save: `127.0.0.1    quickstart.cloudera`
+  3. Append the following line, then save: `127.0.0.1    docker.w261`
   4. Refresh DNS by running `ipconfig /flushdns` in command prompt or powershell
   
 ### Minimum System Requirements for MIDS W261 Cloudera Hadoop Container
@@ -154,11 +147,6 @@ sc = spark.sparkContext
 ### Minimum OS requirement
 
 - Windows 10 Pro/Education is required to run Docker on Windows. A free license of Windows 10 Education is avaliable to all students through [UCB Software Central](https://software.berkeley.edu/operating-systems#Microsoft)
-
-### Auto-save/Overwrite Issues
-
-- https://github.com/jupyter/notebook/issues/484
-This has been addressed with Jupyter 5.1.0 which is being used for latest build of the container.
 
 ## Mac Issues
 
