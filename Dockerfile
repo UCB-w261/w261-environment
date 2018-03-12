@@ -8,7 +8,7 @@ RUN yum clean all && \
     yum install -y --quiet wget htop && \
     yum clean all
 
-ENV SPARK_VERSION=2.2.1
+ENV SPARK_VERSION=2.3.0
 ENV HADOOP_VERSION=2.7
 ENV ANACONDA_VERSION=5.0.1
 ENV SPARK_HOME=/opt/spark
@@ -29,8 +29,8 @@ RUN mkdir -p /opt && \
 
 # Update Python packages
 ENV PATH=/opt/anaconda/bin:$PATH
-RUN conda update conda && \
-    conda update --all && \
+RUN conda update -y conda && \
+    conda update -y --all && \
     conda install -y pip setuptools wheel \
     cython numpy pandas scipy nltk scikit-learn scikit-image sympy \
     ipython ipython_genutils ipython-qtconsole ipython-notebook jupyter \
