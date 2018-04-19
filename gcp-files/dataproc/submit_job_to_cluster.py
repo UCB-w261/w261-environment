@@ -76,7 +76,11 @@ def create_cluster(dataproc, project, zone, region, cluster_name,
         'clusterName': cluster_name,
         'config': {
             'gceClusterConfig': {
-                'zoneUri': zone_uri
+                'zoneUri': zone_uri,
+                "metadata": {
+                    "CONDA_PACKAGES": "\"numpy pandas\"",
+                    "MINICONDA_VARIANT": "2"
+                }
             },
             'masterConfig': {
                 'numInstances': master_nodes,
@@ -85,7 +89,15 @@ def create_cluster(dataproc, project, zone, region, cluster_name,
             'workerConfig': {
                 'numInstances': worker_nodes,
                 'machineTypeUri': instance_type
-            }
+            },
+            "initializationActions": [
+                {
+                    "executableFile": "gs://dataproc-initialization-actions/conda/bootstrap-conda.sh"
+                },
+                {
+                    "executableFile": "gs://dataproc-initialization-actions/conda/install-conda-env.sh"
+                }
+            ]
         }
     }
     result = dataproc.projects().regions().clusters().create(
@@ -263,7 +275,7 @@ if __name__ == '__main__':
         '--key_file', help='Location of your key file for service account')
     parser.add_argument(
         '--instance_type', help='Instance types used for this cluster',
-        default='n1-standard-1')
+        default='n1-standard-4')
     parser.add_argument(
         '--master_nodes', help='Number of master nodes',
         default=1)
