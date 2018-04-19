@@ -53,6 +53,12 @@ if __name__ == '__main__':
     # Note: sub-regions (e.g.: us-central1-a/b) are currently not supported
     parser.add_argument(
         '--region', default='global', help='Region to create clusters in')
+    parser.add_argument(
+        '--key-file', help='Location of your key file for service account')
 
     args = parser.parse_args()
+
+    if args.key_file is not None:
+        os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = args.key_file
+
     main(args.project_id, args.region)

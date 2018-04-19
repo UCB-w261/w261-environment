@@ -256,8 +256,14 @@ if __name__ == '__main__':
     parser.add_argument(
         '--create_new_cluster',
         action='store_true', help='States if the cluster should be created')
+    parser.add_argument(
+        '--key-file', help='Location of your key file for service account')
 
     args = parser.parse_args()
+
+    if args.key_file is not None:
+        os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = args.key_file
+
     main(
         args.project_id, args.zone, args.cluster_name,
         args.gcs_bucket, args.pyspark_file, args.create_new_cluster)

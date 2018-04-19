@@ -25,6 +25,6 @@ information.
 import pyspark
 
 sc = pyspark.SparkContext()
-rdd = sc.textFile('gs://path-to-your-GCS-file')
+rdd = sc.textFile('gs://w261-data/unsorted.txt')
 print(sorted(rdd.collect()))
 # [END pyspark]
