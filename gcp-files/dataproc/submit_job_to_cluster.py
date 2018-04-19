@@ -65,7 +65,8 @@ def download_output(project_id, cluster_id, output_bucket, job_id):
 
 
 # [START create_cluster]
-def create_cluster(dataproc, project, zone, region, cluster_name):
+def create_cluster(dataproc, project, zone, region, cluster_name,
+                   instance_type, master_nodes, worker_nodes):
     print('Creating cluster...')
     zone_uri = \
         'https://www.googleapis.com/compute/v1/projects/{}/zones/{}'.format(
@@ -78,12 +79,12 @@ def create_cluster(dataproc, project, zone, region, cluster_name):
                 'zoneUri': zone_uri
             },
             'masterConfig': {
-                'numInstances': 1,
-                'machineTypeUri': 'n1-standard-1'
+                'numInstances': master_nodes,
+                'machineTypeUri': instance_type
             },
             'workerConfig': {
-                'numInstances': 2,
-                'machineTypeUri': 'n1-standard-1'
+                'numInstances': worker_nodes,
+                'machineTypeUri': instance_type
             }
         }
     }
@@ -197,6 +198,7 @@ def get_client():
 
 
 def main(project_id, zone, cluster_name, bucket_name,
+         instance_type, master_nodes, worker_nodes,
          pyspark_file=None, create_new_cluster=True):
     dataproc = get_client()
     region = get_region_from_zone(zone)
@@ -208,7 +210,8 @@ def main(project_id, zone, cluster_name, bucket_name,
 
         if create_new_cluster:
             create_cluster(
-                dataproc, project_id, zone, region, cluster_name)
+                dataproc, project_id, zone, region, cluster_name,
+                instance_type, master_nodes, worker_nodes)
             wait_for_cluster_creation(
                 dataproc, project_id, region, cluster_name)
 
@@ -257,7 +260,16 @@ if __name__ == '__main__':
         '--create_new_cluster',
         action='store_true', help='States if the cluster should be created')
     parser.add_argument(
-        '--key-file', help='Location of your key file for service account')
+        '--key_file', help='Location of your key file for service account')
+    parser.add_argument(
+        '--instance_type', help='Instance types used for this cluster',
+        default='n1-standard-1')
+    parser.add_argument(
+        '--master_nodes', help='Number of master nodes',
+        default=1)
+    parser.add_argument(
+        '--worker_nodes', help='Number of worker nodes',
+        default=2)
 
     args = parser.parse_args()
 
@@ -266,4 +278,5 @@ if __name__ == '__main__':
 
     main(
         args.project_id, args.zone, args.cluster_name,
-        args.gcs_bucket, args.pyspark_file, args.create_new_cluster)
+        args.gcs_bucket, args.instance_type, args.master_nodes, args.worker_nodes,
+        args.pyspark_file, args.create_new_cluster)
