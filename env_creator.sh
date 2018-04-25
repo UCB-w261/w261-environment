@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 EXISTS=`conda env list | grep "dataproc " | wc -l`
 if [ $EXISTS -eq "0" ]
 then

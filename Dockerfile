@@ -10,7 +10,7 @@ RUN yum clean all && \
 
 ENV SPARK_VERSION=2.3.0
 ENV HADOOP_VERSION=2.7
-ENV ANACONDA_VERSION=5.0.1
+ENV ANACONDA_VERSION=5.1.0
 ENV SPARK_HOME=/opt/spark
 # Install Java and Spark and Anaconda
 RUN mkdir -p /opt && \
@@ -29,17 +29,28 @@ RUN mkdir -p /opt && \
 
 # Update Python packages
 ENV PATH=/opt/anaconda/bin:$PATH
+# Python 2
 RUN conda update -y conda && \
     conda update -y --all && \
     conda install -y pip setuptools wheel \
     cython numpy pandas scipy nltk scikit-learn scikit-image sympy \
-    ipython ipython_genutils ipython-qtconsole ipython-notebook jupyter \
     libpng unicodecsv ujson zlib && \
-    conda install -c conda-forge -y mrjob notebook jupyter_contrib_nbextensions jupyterlab && \
-    jupyter nbextension enable toc2/main && \
+    conda install -c conda-forge -y jupyterlab && \
     conda clean -tp -y && \
 	pip install --no-cache-dir bash_kernel && \
-    python -m bash_kernel.install
+    python -m bash_kernel.install && \
+    cd $SPARK_HOME/python &&\
+    python setup.py install
+# Python 3
+RUN conda create --name Python3 python=3.6 && \
+    source activate Python3 && \
+    conda install -y pip setuptools wheel \
+    cython numpy pandas scipy nltk scikit-learn scikit-image sympy && \
+    conda install -c conda-forge -y jupyterlab && \
+    python -m ipykernel install --user --name myenv --display-name "Python (3)" && \
+    cd $SPARK_HOME/python &&\
+    python setup.py install
+
 
 RUN cd $SPARK_HOME/python &&\
       python setup.py install
@@ -55,7 +66,7 @@ COPY docker/spark-defaults.conf /etc/spark/conf.dist/spark-defaults.conf
 RUN chmod 755 /root/start-notebook.sh && \
     chmod 755 /usr/bin/docker-quickstart
 
-ENV PYSPARK_PYTHON=/opt/anaconda/bin/python
+ENV PYSPARK_PYTHON=/opt/anaconda/envs/Python3/bin/python
 ENV SHELL=bash
 ENV JAVA_HOME=/usr/java/jdk1.8.0_131
 ENV PATH=$SPARK_HOME/bin:$SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:$PATH

@@ -1,7 +1,8 @@
 version: '3'
 services:
   quickstart.cloudera:
-    image: w261/w261-environment:latest
+    #image: w261/w261-environment:latest
+    image: 261env
     hostname: docker.w261
     privileged: true
     command: bash -c "/root/start-notebook.sh;/usr/bin/docker-quickstart"
