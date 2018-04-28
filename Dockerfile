@@ -23,33 +23,20 @@ RUN mkdir -p /opt && \
     tar -xzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && \
     mv spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} ${SPARK_HOME}-${SPARK_VERSION} && \
     ln -s ${SPARK_HOME}-${SPARK_VERSION} ${SPARK_HOME} && \
-    wget --quiet https://repo.continuum.io/archive/Anaconda2-${ANACONDA_VERSION}-Linux-x86_64.sh -O anaconda.sh && \
+    wget --quiet https://repo.continuum.io/archive/Anaconda3-${ANACONDA_VERSION}-Linux-x86_64.sh -O anaconda.sh && \
 	/bin/bash /downloads/anaconda.sh -b -p /opt/anaconda && \
     rm -rf /downloads
 
 # Update Python packages
 ENV PATH=/opt/anaconda/bin:$PATH
-# Python 2
 RUN conda update -y conda && \
     conda update -y --all && \
     conda install -y pip setuptools wheel \
-    cython numpy pandas scipy nltk scikit-learn scikit-image sympy \
-    libpng unicodecsv ujson zlib && \
+    cython numpy pandas scipy nltk scikit-learn scikit-image sympy && \
     conda install -c conda-forge -y jupyterlab && \
     conda clean -tp -y && \
 	pip install --no-cache-dir bash_kernel && \
-    python -m bash_kernel.install && \
-    cd $SPARK_HOME/python &&\
-    python setup.py install
-# Python 3
-RUN conda create --name Python3 python=3.6 && \
-    source activate Python3 && \
-    conda install -y pip setuptools wheel \
-    cython numpy pandas scipy nltk scikit-learn scikit-image sympy && \
-    conda install -c conda-forge -y jupyterlab && \
-    python -m ipykernel install --user --name myenv --display-name "Python (3)" && \
-    cd $SPARK_HOME/python &&\
-    python setup.py install
+    python -m bash_kernel.install
 
 
 RUN cd $SPARK_HOME/python &&\
