@@ -78,7 +78,7 @@ If we review the bash scripts `startup.sh` we can see that the jupyter notebook 
 ## How to Use
 
 1. Install Docker (Restart as needed)
-2. Copy the contents of the `docker-compose.yml` file in this repo to somewhere on your computer with the same name
+2. Copy the contents of the `docker-compose.yml` file from your **class repo** to somewhere on your computer with the same name
 3. Edit the `Volume` section to match where you want to store your notebooks/homework locally
 4. Open up a terminal or Powershell windows and change directory to where you stored your `docker-compose.yml` file
 5. Run `docker-compose up`
