@@ -78,12 +78,9 @@ If we review the bash scripts `startup.sh` we can see that the jupyter notebook 
 ## How to Use
 
 1. Install Docker (Restart as needed)
-2. Copy the contents of the `docker-compose.yml` file from your **class repo** to somewhere on your computer with the same name
-3. Edit the `Volume` section to match where you want to store your notebooks/homework locally
-4. Open up a terminal or Powershell windows and change directory to where you stored your `docker-compose.yml` file
-5. Run `docker-compose up`
-6. Open your browser and go to `localhost:8889` for regular Python, MRJob, and Pyspark
-7. If using spark a sparkContext is automatically defined during initialization, in the `sc` variable
+2. Go to your class repo folder on your computer
+3. Run `docker-compose up`
+4. Open your browser and go to `localhost:8889`
 
 ## General Issues
 
