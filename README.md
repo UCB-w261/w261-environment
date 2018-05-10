@@ -26,7 +26,7 @@ docker pull w261/w261-environment
 
 ## Things to know
 
-In the container for W261 we use docker-compose to build our container. Let's review the configuration file docker-compose.yml in its current state at the time of writing. Please use the commited file in repo since it will always be upto date.
+In the container for W261 we use docker-compose to build our container. Below is a potentially out of date example. Use the one in your class repo.
 
 ```
 version: '3'
