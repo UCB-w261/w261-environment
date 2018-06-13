@@ -8,9 +8,9 @@ RUN yum clean all && \
     yum install -y --quiet wget htop && \
     yum clean all
 
-ENV SPARK_VERSION=2.3.0
+ENV SPARK_VERSION=2.3.1
 ENV HADOOP_VERSION=2.7
-ENV ANACONDA_VERSION=5.1.0
+ENV ANACONDA_VERSION=5.2.0
 ENV SPARK_HOME=/opt/spark
 # Install Java and Spark and Anaconda
 RUN mkdir -p /opt && \
