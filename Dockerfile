@@ -2,10 +2,22 @@ FROM cloudera/quickstart
 MAINTAINER James Winegar
 
 # Install linux development tools and security updates
+COPY docker/cloudera-kafka.repo /etc/yum.repos.d/cloudera-kafka.repo
 RUN yum clean all && \
     rpm --rebuilddb; yum install -y yum-plugin-ovl && \
+    yum update -y && \
     yum groupinstall -y 'Development Tools' && \
-    yum install -y --quiet wget htop && \
+    yum install -y --quiet \
+      wget \
+      htop \
+      hadoop-yarn-nodemanager \
+      hadoop-hdfs-datanode \
+      hadoop-mapreduce \
+      hadoop-hdfs-namenode \
+      hadoop-yarn-resourcemanager \
+      hadoop-client \
+      kafka \
+      kafka-server && \
     yum clean all
 
 ENV SPARK_VERSION=2.3.1
@@ -24,7 +36,7 @@ RUN mkdir -p /opt && \
     mv spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} ${SPARK_HOME}-${SPARK_VERSION} && \
     ln -s ${SPARK_HOME}-${SPARK_VERSION} ${SPARK_HOME} && \
     wget --quiet https://repo.continuum.io/archive/Anaconda3-${ANACONDA_VERSION}-Linux-x86_64.sh -O anaconda.sh && \
-	/bin/bash /downloads/anaconda.sh -b -p /opt/anaconda && \
+    /bin/bash /downloads/anaconda.sh -b -p /opt/anaconda && \
     rm -rf /downloads
 
 # Update Python packages
@@ -33,9 +45,9 @@ RUN conda update -y conda && \
     conda update -y --all && \
     conda install -y pip setuptools wheel \
     cython numpy pandas scipy nltk scikit-learn scikit-image sympy && \
-    conda install -c conda-forge -y jupyterlab && \
+    conda install -c conda-forge -y jupyterlab kafka-python && \
     conda clean -tp -y && \
-	pip install --no-cache-dir bash_kernel && \
+    pip install --no-cache-dir bash_kernel && \
     python -m bash_kernel.install
 
 

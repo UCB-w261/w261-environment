@@ -1,0 +1,6 @@
+[cloudera-kafka]
+# Packages for Cloudera's Distribution for kafka, Version 2.2, on RedHat  or CentOS 6 x86_64
+name=Cloudera's Distribution for kafka, Version 2.2
+baseurl=http://archive.cloudera.com/kafka/redhat/6/x86_64/kafka/2.2/
+gpgkey = http://archive.cloudera.com/kafka/redhat/6/x86_64/kafka/RPM-GPG-KEY-cloudera
+gpgcheck = 1
