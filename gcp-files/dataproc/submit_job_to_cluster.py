@@ -34,14 +34,6 @@ def get_pyspark_file(filename):
     return f, os.path.basename(filename)
 
 
-def get_region_from_zone(zone):
-    try:
-        region_as_list = zone.split('-')[:-1]
-        return '-'.join(region_as_list)
-    except (AttributeError, IndexError, ValueError):
-        raise ValueError('Invalid zone provided, please check your input.')
-
-
 def upload_pyspark_file(project_id, bucket_name, filename, file):
     """Uploads the PySpark file in this directory to the configured
     input bucket."""
@@ -218,7 +210,7 @@ def main(project_id, zone, cluster_name, bucket_name,
          instance_type, master_nodes, worker_nodes,
          pyspark_file=None, create_new_cluster=True):
     dataproc = get_client()
-    region = get_region_from_zone(zone)
+    region = 'global'
     try:
         if pyspark_file:
             spark_file, spark_filename = get_pyspark_file(pyspark_file)
@@ -263,30 +255,53 @@ if __name__ == '__main__':
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument(
-        '--project_id', help='Project ID you want to access.', required=True),
+            '--project_id', 
+            help='Project ID you want to access.',
+            required=True
+        ),
     parser.add_argument(
-        '--zone', help='Zone to create clusters in/connect to', required=True)
+            '--zone',
+            help='Zone to create clusters in/connect to.',
+            required=True
+        ),
     parser.add_argument(
-        '--cluster_name',
-        help='Name of the cluster to create/connect to', required=True)
+            '--cluster_name',
+            help='Name of the cluster to create/connect to',
+            required=True
+        )
     parser.add_argument(
-        '--gcs_bucket', help='Bucket to upload Pyspark file to', required=True)
+            '--gcs_bucket',
+            help='Bucket to upload Pyspark file to',
+            required=True
+        )
     parser.add_argument(
-        '--pyspark_file', help='Pyspark filename. Defaults to pyspark_sort.py')
+            '--pyspark_file',
+            help='Pyspark filename. Defaults to pyspark_sort.py'
+        )
     parser.add_argument(
-        '--create_new_cluster',
-        action='store_true', help='States if the cluster should be created')
+            '--create_new_cluster',
+            action='store_true',
+            help='States if the cluster should be created'
+        )
     parser.add_argument(
-        '--key_file', help='Location of your key file for service account')
+            '--key_file',
+            help='Location of your key file for service account'
+        )
     parser.add_argument(
-        '--instance_type', help='Instance types used for this cluster',
-        default='n1-standard-4')
+            '--instance_type',
+            help='Instance types used for this cluster',
+            default='n1-standard-4'
+        )
     parser.add_argument(
-        '--master_nodes', help='Number of master nodes',
-        default=1)
+            '--master_nodes',
+            help='Number of master nodes',
+            default=1
+        )
     parser.add_argument(
-        '--worker_nodes', help='Number of worker nodes',
-        default=2)
+            '--worker_nodes',
+            help='Number of worker nodes',
+            default=2
+        )
 
     args = parser.parse_args()
 
