@@ -71,7 +71,8 @@ def create_cluster(dataproc, project, zone, region, cluster_name,
                 'zoneUri': zone_uri,
                 "metadata": {
                     "CONDA_PACKAGES": "\"numpy pandas\"",
-                    "MINICONDA_VARIANT": "2"
+                    "MINICONDA_VARIANT": "3",
+                    "MINICONDA_VERSION": "latest"
                 }
             },
             "softwareConfig": {
