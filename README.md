@@ -86,7 +86,7 @@ If we review the bash scripts `startup.sh` we can see that the jupyter notebook 
 
 Using python packages against HDFS
 
-Add the following parameter to Map Reduce Streaming and MRJob commands:
+Add the following parameter to Map Reduce Streaming commands:
 `-cmdenv PATH=/opt/anaconda/bin:$PATH`
 
 ### Hostname mapping
@@ -114,8 +114,8 @@ Docker needs 2 CPUs and 4 GB of RAM to ensure resource managers don't crash duri
   3. Click Advanced
   4. Slide Memory to 4096 MB
 - Mac OS
-  1. Click Docker in the clock(?) area
-  2. Click Settings
+  1. Click Docker in the menu bar (near day/time at top-right)
+  2. Click Preferences
   3. Click Advanced
   4. Slide Memory to 4096 MB
 
