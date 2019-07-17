@@ -3,6 +3,7 @@
 ## What is Docker? 
 
 Docker is a container management platform for automating deployments of re-usable environemnets. 
+https://towardsdatascience.com/learn-enough-docker-to-be-useful-b7ba70caeb4b
 
 ## What are Containers? Containers vs VM
 
