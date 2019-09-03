@@ -103,6 +103,11 @@ Apply the `docker.w261` alias for `127.0.0.1` aka `localhost`
   2. Open `C:\Windows\System32\drivers\etc\hosts` in notepad.  Note the file has no extension
   3. Append the following line, then save: `127.0.0.1    docker.w261`
   4. Refresh DNS by running `ipconfig /flushdns` in command prompt or powershell
+
+*Note on Windows:*
+> On win10, the hosts file is read only and can not be edited directly
+> There are 2 methods to edit it in this case, 1) change the file to read/write and edit or 2) make a copy of the hosts file, move original out of way, then copy edited file to correct folder. Either method should work. 
+> https://superuser.com/questions/958991/windows-10-cant-edit-hosts-file
   
 ### Minimum System Requirements for MIDS W261 Cloudera Hadoop Container
 
