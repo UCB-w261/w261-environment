@@ -146,21 +146,7 @@ sc = spark.sparkContext
 
 - Windows 10 Pro/Education is required to run Docker on Windows. A free license of Windows 10 Education is avaliable to all students through [UCB Software Central](https://software.berkeley.edu/operating-systems#Microsoft)
 
-- Starting Docker: Port bind error. This issue is due to ports reserved by Hyper-V. 
-```
-# Display the reserved ports ports. 
-netsh interface ipv4 show excludedportrange protocol=tcp
-
-# To free the ports, disable Hyper-V . Restart when prompted
-dism.exe /Online /Disable-Feature:Microsoft-Hyper-V
-
-#Reserve Ports
-netsh int ipv4 add excludedportrange protocol=tcp startport=50070 numberofports=1
-netsh int ipv4 add excludedportrange protocol=tcp startport=50075 numberofports=1
-
-#Enable Hyper-V
-dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All
-```
+- See the wiki for common issues and solutions: https://github.com/UCB-w261/w261-environment/wiki/Troubleshooting-Docker
 
 ## Mac Issues
 
