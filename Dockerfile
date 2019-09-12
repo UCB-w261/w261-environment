@@ -45,9 +45,9 @@ RUN conda update -y conda && \
     conda update -y --all && \
     conda install -y pip setuptools wheel \
     cython numpy pandas scipy nltk scikit-learn scikit-image sympy && \
-    conda install -c conda-forge -y jupyterlab kafka-python && \
+    conda install -c conda-forge -y jupyterlab kafka-python spacy && \
     conda clean -tp -y && \
-    pip install --no-cache-dir bash_kernel && \
+    pip install --no-cache-dir bash_kernel PyGithub['integrations'] && \
     python -m bash_kernel.install
 
 
