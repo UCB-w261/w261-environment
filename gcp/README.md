@@ -88,3 +88,8 @@ delete the cluster.
 
 You can optionally specify a `--pyspark_file` argument to change from the default
 `pyspark_sort.py` included in this script to a new script.
+
+## For additional walkthrough getting set up with GCP, watch the GCP OH recording.
+
+You will need to login through the ISVC. Click on any recording to authenticate your zoom account. Then click this link:   
+https://zoom.us/recording/play/rRDuG9DFGFZ8NNdkZL4SVGmlqcSARzvT3WA9ESH928Gdd0RfGYrVcbxm8UTPKgk8?continueMode=true
