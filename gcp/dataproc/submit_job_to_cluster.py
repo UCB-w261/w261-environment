@@ -77,7 +77,7 @@ def create_cluster(dataproc, project, zone, region, cluster_name,
             },
             "softwareConfig": {
                 'properties': {
-                    'spark:spark.jars.packages': 'graphframes:graphframes:0.7.0-spark2.3-s_2.11,com.databricks:spark-avro_2.11:4.0.0'
+                    'spark:spark.jars.packages': 'com.databricks:spark-xml_2.11:0.4.1,graphframes:graphframes:0.7.0-spark2.3-s_2.11,com.databricks:spark-avro_2.11:4.0.0'
                 }
             },
             'masterConfig': {
