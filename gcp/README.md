@@ -1,3 +1,11 @@
+## For additional walkthroughs, watch previous GCP Office Hour recordings.
+
+You will need to login through the ISVC. Click on any recording to authenticate your zoom account. Then click these links:  
+* First OH    
+https://zoom.us/recording/play/rRDuG9DFGFZ8NNdkZL4SVGmlqcSARzvT3WA9ESH928Gdd0RfGYrVcbxm8UTPKgk8?continueMode=true   
+* Second OH    
+https://api.zoom.us/recording/play/RDDa_UeSzr7IDlMUkkO6furQ9IheCyTymdmDLoqaTgX2MmaSgv85wOMFa8M_zWCX
+
 # Cloud Dataproc API Example
 
 [![Open in Cloud Shell][shell_img]][shell_link]
@@ -89,7 +97,3 @@ delete the cluster.
 You can optionally specify a `--pyspark_file` argument to change from the default
 `pyspark_sort.py` included in this script to a new script.
 
-## For additional walkthrough getting set up with GCP, watch the GCP OH recording.
-
-You will need to login through the ISVC. Click on any recording to authenticate your zoom account. Then click this link:   
-https://zoom.us/recording/play/rRDuG9DFGFZ8NNdkZL4SVGmlqcSARzvT3WA9ESH928Gdd0RfGYrVcbxm8UTPKgk8?continueMode=true
