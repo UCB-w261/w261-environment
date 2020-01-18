@@ -2,10 +2,7 @@
 
 ## GCP Credits
 
-Here is the URL you will need to access in order to request a Google Cloud Platform coupon. You will be asked to provide your school email address and name. An email will be sent to you to confirm these details before a coupon is sent to you.
-Student Coupon Retrieval Link:
-
-[Get your GCP credits here](https://google.secure.force.com/GCPEDU?cid=wyxM0ZddjmNCGBHegrGshOHuz8ytOL1a2RmZhanqvVTpOorEpW8wIuzZ8cP5Km0M "GCP Link")
+Here is the URL you will need to access in order to request a Google Cloud Platform coupon. You will be asked to provide your school email address and name. An email will be sent to you to confirm these details before a coupon is sent to you:
 
 - You will be asked for a name and email address, which needs to match the domain. A confirmation email will be sent to you with a coupon code.
 - You can request a coupon from the URL and redeem it until: 5/6/2020
@@ -21,7 +18,7 @@ Student Coupon Retrieval Link:
 
 2. Click on the Cloud Shell icon
 
-![alt text](https://github.com/UCB-w261/w261-environment/tree/master/setup-environment(not-supported)/cloud_shell.png "Cloud Shell")
+![alt text](https://github.com/UCB-w261/w261-environment/tree/master/setup-new-hadoop-env/cloud_shell.png "Cloud Shell")
 
 3. It might take a few minutes if it's the first time. Pay attention what `Project ID` is showing on top of the Cloud Shell window. This should match what you setup on your `gcloud init` configuration. Run the following command:
 
@@ -51,7 +48,7 @@ You might need to adjust the argument for `--zone`, again, to match what you set
 After the green check mark shows next to your newly instantiated VM, you can go back to your local Terminal shell window, Google Cloud Shell for Windows users, and run this command to connect to your VM:
 
 ```
-gcloud compute ssh w261-hadoop-jgs \
+gcloud compute ssh w261-hadoop \
   --ssh-flag="-L 8889:127.0.0.1:8889" \
   --ssh-flag="-L 8088:127.0.0.1:8088" \
   --ssh-flag="-L 19888:127.0.0.1:19888" \
@@ -71,6 +68,6 @@ The instance contains a script that will spin the w261 Docker container at start
 
 After 15 minutes of instance being idle, the same script will bring the Docker container down, and stop the instance from taking precious credits away from you.
 
-![alt text](https://github.com/UCB-w261/w261-environment/tree/master/setup-environment(not-supported)/jupyter_lab_autosave.png)
+![alt text](https://github.com/UCB-w261/w261-environment/tree/master/setup-new-hadoop-env/jupyter_lab_autosave.png)
 
 Also, make sure this setting is active on Jupyter Lab, this way, even if you leave the instance unattended, chances of losing valuable progress are minimal.
