@@ -18,7 +18,7 @@ Here is the URL you will need to access in order to request a Google Cloud Platf
 
 2. Click on the Cloud Shell icon
 
-![alt text](https://github.com/UCB-w261/w261-environment/tree/master/setup-new-hadoop-env/cloud_shell.png "Cloud Shell")
+![alt text](https://github.com/UCB-w261/w261-environment/blob/master/setup-new-hadoop-env/cloud_shell.png "Cloud Shell")
 
 3. It might take a few minutes if it's the first time. Pay attention what `Project ID` is showing on top of the Cloud Shell window. This should match what you setup on your `gcloud init` configuration. Run the following command:
 
@@ -68,6 +68,6 @@ The instance contains a script that will spin the w261 Docker container at start
 
 After 15 minutes of instance being idle, the same script will bring the Docker container down, and stop the instance from taking precious credits away from you.
 
-![alt text](https://github.com/UCB-w261/w261-environment/tree/master/setup-new-hadoop-env/jupyter_lab_autosave.png)
+![alt text](https://github.com/UCB-w261/w261-environment/blob/master/setup-new-hadoop-env/jupyter_lab_autosave.png)
 
 Also, make sure this setting is active on Jupyter Lab, this way, even if you leave the instance unattended, chances of losing valuable progress are minimal.
