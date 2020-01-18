@@ -56,7 +56,9 @@ gcloud compute ssh w261-hadoop \
   --ssh-flag="-L 41537:127.0.0.1:41537"
 ```
 
-If is throwing you an error message that `GCP` cannot find the instance, it means that the project and/or zone on your Google Cloud SDK `gcloud init` setup and the VM do not match. Do not terminate your instance, re-run `gcloud init` and make them both match.
+Note: If is throwing you an error message that `GCP` cannot find the instance, it means that the project and/or zone on your Google Cloud SDK `gcloud init` setup and the VM do not match. Do not terminate your instance, re-run `gcloud init` and make them both match.
+
+The above command will get you the instance prompt at your user home folder. Here is the best place to `git clone https://github.com/UCB...` the repos needed for HW and to run the demos. This operation is only needed once. Afterwards, you only need to `git pull` or go through the process of committing and pushing changes explained in week 1.
 
 [Jupyter Lab](http://localhost:8889 "Click here to open Jupyter Lab")
 
