@@ -2,13 +2,14 @@
 
 ## GCP Credits
 
-Here is the URL you will need to access in order to request a Google Cloud Platform coupon. You will be asked to provide your school email address and name. An email will be sent to you to confirm these details before a coupon is sent to you:
+Here are the things to keep in mind to request a Google Cloud Platform coupon. You will be asked to provide your school email address and name. An email will be sent to you to confirm these details before a coupon is sent to you:
 
 - You will be asked for a name and email address, which needs to match the domain. A confirmation email will be sent to you with a coupon code.
 - You can request a coupon from the URL and redeem it until: 5/6/2020
 - Coupon valid through: 1/6/2021
 - You can only request ONE code per unique email address.
 - Please contact me if you have any questions or issues.
+- Check the Slack infrastructure channel to get the URL.
 
 ## Create your Instance
 
@@ -20,7 +21,14 @@ Here is the URL you will need to access in order to request a Google Cloud Platf
 
 ![alt text](https://github.com/UCB-w261/w261-environment/blob/master/setup-new-hadoop-env/cloud_shell.png "Cloud Shell")
 
-3. It might take a few minutes if it's the first time. Pay attention what `Project ID` is showing on top of the Cloud Shell window. This should match what you setup on your `gcloud init` configuration. Run the following command:
+3. It might take a few minutes if it's the first time. Pay attention what `Project ID` is showing on top of the Cloud Shell window. This should match what you setup on your `gcloud init` configuration. If you don't see a project id in the output from the Cloud Shell, then you need to select a project in your web console by clicking the item circled in red as shown in the image below.
+
+![alt text](https://github.com/UCB-w261/w261-environment/blob/master/setup-new-hadoop-env/project-id.png "Project ID")
+
+The real project id is obtained in the pop-up window.
+
+
+4. Run the following command:
 
 ```
 gcloud beta compute instances create w261-hadoop \
@@ -41,7 +49,7 @@ gcloud beta compute instances create w261-hadoop \
 ```
 You might need to adjust the argument for `--zone`, again, to match what you set on `gcloud init`.
 
-4. Close the Cloud Shell window by running `exit` once the you get the prompt back.
+5. Close the Cloud Shell window by running `exit` once the you get the prompt back.
 
 ## Connect to Jupyter Lab
 
@@ -56,7 +64,7 @@ gcloud compute ssh w261-hadoop \
   --ssh-flag="-L 41537:127.0.0.1:41537"
 ```
 
-Note: If is throwing you an error message that `GCP` cannot find the instance, it means that the project and/or zone on your Google Cloud SDK `gcloud init` setup and the VM do not match. Do not terminate your instance, re-run `gcloud init` and make them both match.
+Note: If is throwing you an error message that `GCP` cannot find the instance, it means that the project and/or zone on your Google Cloud SDK `gcloud init` setup and the VM do not match. Do not terminate your instance, re-run `gcloud init` and make them both match. As an alternative, you can set the project and zone directly, without having to re-run gcloud init, with the commands `gcloud config set project my-project-id` and `gcloud config set compute/zone some-zone-goes-here`. Make sure you run either or both, if necessary, where you installed the Google Cloud SDK. Project w261-246901 is only acting as a resource to share the disk image needed to deploy your instance. You should use/create your own project.
 
 The above command will get you the instance prompt at your user home folder. Here is the best place to `git clone https://github.com/UCB...` the repos needed for HW and to run the demos. This operation is only needed once. Afterwards, you only need to `git pull` or go through the process of committing and pushing changes explained in week 1.
 
@@ -68,8 +76,10 @@ Note: Make sure you don't have other services, like `jupyter notebook` or the w2
 
 The instance contains a script that will spin the w261 Docker container at startup. If for some reason you think the service might be down, reboot the VM, or inside the VM `sudo docker ps` to check if the container is running, otherwise `sudo docker-compose -f /home/docker-compose.yml up`.
 
-After 15 minutes of instance being idle, the same script will bring the Docker container down, and stop the instance from taking precious credits away from you.
+After 60 minutes of instance being idle, the same script will bring the Docker container down, and stop the instance from taking precious credits away from you. Check the startup script by clicking the link below.
 
-![alt text](https://github.com/UCB-w261/w261-environment/blob/master/setup-new-hadoop-env/jupyter_lab_autosave.png)
+[Shutdown Script](https://github.com/UCB-w261/w261-environment/tree/master/setup-new-hadoop-env/idle-shutdown.sh "Shutdown Script")
 
 Also, make sure this setting is active on Jupyter Lab, this way, even if you leave the instance unattended, chances of losing valuable progress are minimal.
+
+![alt text](https://github.com/UCB-w261/w261-environment/blob/master/setup-new-hadoop-env/jupyter_lab_autosave.png)
