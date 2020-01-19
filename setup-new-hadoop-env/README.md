@@ -52,8 +52,9 @@ You might need to adjust the argument for `--zone`, again, to match what you set
 5. Close the Cloud Shell window by running `exit` once the you get the prompt back.
 
 ## Connect to Jupyter Lab
+### Important: All of this happens in your local computer.
 
-After the green check mark shows next to your newly instantiated VM, you can go back to your local Terminal shell window, Google Cloud Shell for Windows users, and run this command to connect to your VM:
+After the green check mark shows next to your newly instantiated VM, you can go back to your local Terminal shell window, Google Cloud SDK Shell for Windows users, and run this command to connect to your VM:
 
 ```
 gcloud compute ssh w261-hadoop \
@@ -64,9 +65,19 @@ gcloud compute ssh w261-hadoop \
   --ssh-flag="-L 41537:127.0.0.1:41537"
 ```
 
-Note: If is throwing you an error message that `GCP` cannot find the instance, it means that the project and/or zone on your Google Cloud SDK `gcloud init` setup and the VM do not match. Do not terminate your instance, re-run `gcloud init` and make them both match. As an alternative, you can set the project and zone directly, without having to re-run gcloud init, with the commands `gcloud config set project my-project-id` and `gcloud config set compute/zone some-zone-goes-here`. Make sure you run either or both, if necessary, where you installed the Google Cloud SDK. Project w261-246901 is only acting as a resource to share the disk image needed to deploy your instance. You should use/create your own project.
+Note: If it's throwing you an error message that `GCP` cannot find the instance, it means that the project and/or zone on your Google Cloud SDK `gcloud init` setup and on the VM do not match. Do not terminate your instance, re-run `gcloud init` and make them both match. As an alternative, you can set the project and zone directly, without having to re-run gcloud init, with the commands:
 
-The above command will get you the instance prompt at your user home folder. Here is the best place to `git clone https://github.com/UCB...` the repos needed for HW and to run the demos. This operation is only needed once. Afterwards, you only need to `git pull` or go through the process of committing and pushing changes explained in week 1.
+`gcloud config set project my-project-id`
+
+`gcloud config set compute/zone some-zone-goes-here`
+
+Make sure you run either or both, if necessary, where you installed the Google Cloud SDK locally. Project w261-246901 is only acting as a resource to share the disk image needed to deploy your instance with the right tools for class. You should use/create your own project.
+
+After you connect successfully to your VM, you should get the instance prompt at your user home folder, showing like:
+
+`your-username@w261-hadoop:~$`
+
+Here is the best place to `git clone https://github.com/UCB...` the repos needed for HW and to run the demos. This operation is only needed once. Afterwards, you only need to `git pull` or go through the process of committing and pushing changes explained in week 1.
 
 [Jupyter Lab](http://localhost:8889 "Click here to open Jupyter Lab")
 
@@ -74,7 +85,13 @@ Note: Make sure you don't have other services, like `jupyter notebook` or the w2
 
 ## VM Automation
 
-The instance contains a script that will spin the w261 Docker container at startup. If for some reason you think the service might be down, reboot the VM, or inside the VM `sudo docker ps` to check if the container is running, otherwise `sudo docker-compose -f /home/docker-compose.yml up`.
+The instance contains a script that will spin the w261 Docker container at startup. If for some reason you think the service might be down, reboot the VM, or inside the VM run:
+
+`sudo docker ps`
+
+to check if the container is running, otherwise:
+
+`sudo docker-compose -f /home/docker-compose.yml up`.
 
 After 60 minutes of instance being idle, the same script will bring the Docker container down, and stop the instance from taking precious credits away from you. Check the startup script by clicking the link below.
 
