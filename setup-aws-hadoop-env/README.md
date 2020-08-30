@@ -99,9 +99,9 @@ chmod 400 w261-ec2.pem
 
 ```
 ssh -i w261-ec2.pem ec2-user@ec2-<public-ip-address>.us-west-1.compute.amazonaws.com \
--L8889:ec2-<public-ip-address>.us-west-1.compute.amazonaws.com:8889 \
--L8080:ec2-<public-ip-address>.us-west-1.compute.amazonaws.com:8080 \
--L19888:ec2-<public-ip-address>.us-west-1.compute.amazonaws.com:19888
+-L8889:localhost:8889 \
+-L8080:localhost:8080 \
+-L19888:localhost:19888
 ```
 **Note:** Replace `<public-ip-address>` with your instance public ip address, i.e. *10-234-12-201*
 
