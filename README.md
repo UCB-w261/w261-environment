@@ -146,6 +146,8 @@ sc = spark.sparkContext
 ## Linux Issues
 
 ## Windows Issues
+Running Docker in WSL: https://github.com/UCB-w261/w261-environment/wiki/Linux-on-Windows   
+See the wiki for common issues: https://github.com/UCB-w261/w261-environment/wiki/Troubleshooting-Docker
 
 ### Minimum OS requirement
 
