@@ -133,6 +133,6 @@ docker-compose up
 ![Key Pair](https://github.com/UCB-w261/w261-environment/blob/master/setup-aws-hadoop-env/jupyter_lab_autosave.png)
 
 
-### 22. Make sure you shutdown your instance when not working on your homeworks. You will be using compute resources at 4x the pace (t2.xlarge), and the Free-Tier account only has a certain amount of hrs for free in a month.
+### 22. Make sure you shutdown your instance when not working on your homeworks. You will be using compute resources at 4x the pace (t2.xlarge), and could cost more than expected if left unattended.
 
 ![Stop Instance](https://github.com/UCB-w261/w261-environment/blob/master/setup-aws-hadoop-env/step_16.png)
