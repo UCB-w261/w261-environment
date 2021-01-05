@@ -22,12 +22,13 @@ Download Docker Community Edition from [Docker](https://docs.docker.com/engine/i
 ## Pull the Class Image
 
 ```
+# Hadoop Environment
 docker pull w261/w261-environment
 ```
 
 ## Things to know
 
-In the container for W261 we use docker-compose to build our container. Below is a potentially out of date example. Use the one in your class repo.
+In the container for W261 we use docker-compose to build our container. This yaml will be used for HW1 and HW2.
 
 ```
 version: '3'
@@ -38,21 +39,20 @@ services:
     privileged: true
     command: bash -c "/root/start-notebook.sh;/usr/bin/docker-quickstart"
     ports:
-      - "8887:8888"   # Hue server
+      - "8888:8888"   # Hue server
       - "8889:8889"   # jupyter
       - "10020:10020" # mapreduce job history server
       - "8022:22"     # ssh
       - "7180:7180"   # Cloudera Manager
       - "11000:11000" # Oozie
       - "50070:50070" # HDFS REST Namenode
-      - "50075:50075" # hdfs REST Datanode
+      - "50075:50075" # HDFS REST Datanode
       - "8088:8088"   # yarn resource manager webapp address
       - "19888:19888" # mapreduce job history webapp address
       - "8983:8983"   # Solr console
       - "8032:8032"   # yarn resource manager access
       - "8042:8042"   # yarn node manager
       - "60010:60010" # hbase
-      - "4040:4040"   # Spark UI
       - "8080:8080"   # Hadoop Job Tracker
     tty: true
     stdin_open: true
@@ -75,6 +75,45 @@ services:
       - /local/path:/media/notebook
 
 If we review the bash scripts `startup.sh` we can see that the jupyter notebook is launched from the `/media/notebook` directory. This is very important for our deployment.
+
+For HW3 and HW4 we will use this `docker-compose.yaml`:
+
+```
+version: '3'
+services:
+  spark:
+    image: jupyter/pyspark-notebook
+    hostname: docker.w261
+    privileged: true
+    user: root
+    environment:
+      - NB_USER=$USER
+      - CHOWN_HOME=yes
+      - GRANT_SUDO=yes
+      - NB_UID=$UID
+      - NB_GID=$GID
+    command: bash -c "start.sh jupyter lab --LabApp.token='' --LabApp.authenticate_prometheus=False --LabApp.portInt=8889"
+    ports:
+      - "8889:8889"
+      - "4040:4040"
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/home/$USER
+```
+
+[This only apply to linux-based systems]
+If you are planning to use this locally, copy the yaml text from above into `temp-docker.yaml`, then inject the environment variables with the following commands:
+
+```
+#IF YOU DON'T HAVE UID OR GID ENV VARS, RUN THIS COMMAND. OTHERWISE SKIP.
+export $(id | cut -d ' ' -f 1,2 | sed -e 's/([^()]*)//g' | tr '[:lower:]' '[:upper:]')
+
+eval "echo \"$(sed 's/"/\\"/g' temp-docker.yaml)\"" > docker-compose.yaml
+
+#SAFELY REMOVE TEMP YAML
+rm temp-docker.yaml
+```
 
 ## How to Use
 
