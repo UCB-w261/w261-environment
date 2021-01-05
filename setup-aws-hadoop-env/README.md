@@ -30,7 +30,7 @@ Follow the link to create your own AWS Free-Tier Account. You are free to use an
 
 5. Select the highlighted image.
 
-![w261-linux-hadoop](https://github.com/UCB-w261/w261-environment/blob/master/setup-aws-hadoop-env/step_04.png)
+![w261-hadoop-env](https://github.com/UCB-w261/w261-environment/blob/master/setup-aws-hadoop-env/step_04_update.png)
 
 
 6. Click the *Actions* button, and then click *Launch*.
@@ -38,7 +38,7 @@ Follow the link to create your own AWS Free-Tier Account. You are free to use an
 ![Launch](https://github.com/UCB-w261/w261-environment/blob/master/setup-aws-hadoop-env/step_05.png)
 
 
-7. Select the suggested Instance Type, and then click *Next*.
+7. Select the suggested Instance Type in the image at the bare minimum. Container will not run if you choose anything less. Click *Next*.
 
 ![Instance Type](https://github.com/UCB-w261/w261-environment/blob/master/setup-aws-hadoop-env/step_06.png)
 
@@ -58,7 +58,7 @@ Follow the link to create your own AWS Free-Tier Account. You are free to use an
 ![Tags](https://github.com/UCB-w261/w261-environment/blob/master/setup-aws-hadoop-env/step_09.png)
 
 
-11. Create a new Security Group. Make sure you only activate port 22 `SSH` and Source is `0.0.0.0/0`. Click *Next*.
+11. Create a new Security Group. Make sure you only activate port 22 `SSH` and Source is `0.0.0.0/0`. Highly recommended, if you have a fixed IP address where you will be working your HWs, to replace `0.0.0.0/0` with your `<IPv4-address>/32`. This way only someone in that IP address can ssh into your VM. Click *Next*.
 
 ![Security Group](https://github.com/UCB-w261/w261-environment/blob/master/setup-aws-hadoop-env/step_11.png)
 
@@ -98,18 +98,19 @@ chmod 400 w261-ec2.pem
 17. Connect to your Instance with the copied command from *Step 15*, and add the following port-forwarding options:
 
 ```
-ssh -i w261-ec2.pem ec2-user@ec2-<public-ip-address>.us-west-1.compute.amazonaws.com \
+ssh -i w261-ec2.pem ec2-user@<vm-public-ip-address> \
 -L8889:localhost:8889 \
 -L8080:localhost:8080 \
--L19888:localhost:19888
+-L19888:localhost:19888 \
+-L4040:localhost:4040
 ```
-**Note:** Replace `<public-ip-address>` with your instance public ip address, i.e. *10-234-12-201*
+**Note:** Replace `<vm-public-ip-address>` with your instance public ip address, i.e. *10-234-12-201*
 
 
 18. Once you are logged in, locate and go to the *main* repo, it should be in `/home/ec2-user/`. Clone your personal repo in this same location.
 
 ```
-git clone https://github.com/UCB-w261/SU20-0X-gituser.git
+git clone https://github.com/UCB-w261/SP21-0X-gituser.git
 ```
 **Note:** Replace `SU20-0X-gituser` accordingly.
 
