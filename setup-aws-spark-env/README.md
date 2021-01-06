@@ -130,7 +130,7 @@ docker-compose up
 git clone https://github.com/UCB-w261/main.git
 git clone https://github.com/UCB-w261/SP21-0X-gituser.git
 ```
-**Note:** Replace `SU20-0X-gituser` accordingly.
+**Note:** Replace `SP21-0X-gituser` accordingly.
 
 
 ### 22. Make sure you shutdown your instance when not working on your homeworks. You will be using compute resources at 4x the pace (t2.xlarge), and could cost more than expected if left unattended.

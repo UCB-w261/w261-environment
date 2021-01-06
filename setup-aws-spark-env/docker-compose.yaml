@@ -11,7 +11,7 @@ services:
       - GRANT_SUDO=yes
       - NB_UID=500
       - NB_GID=500
-    command: bash -c "start.sh jupyter lab --LabApp.token='' --LabApp.authenticate_prometheus=False"
+    command: bash -c "start.sh jupyter lab --LabApp.token='' --LabApp.authenticate_prometheus=False --LabApp.port=8889"
     ports:
       - "8888:8888"
       - "4040:4040"
@@ -19,4 +19,3 @@ services:
     stdin_open: true
     volumes:
       - .:/home/ec2-user
-

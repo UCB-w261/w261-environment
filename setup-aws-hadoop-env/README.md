@@ -112,7 +112,7 @@ ssh -i w261-ec2.pem ec2-user@<vm-public-ip-address> \
 ```
 git clone https://github.com/UCB-w261/SP21-0X-gituser.git
 ```
-**Note:** Replace `SU20-0X-gituser` accordingly.
+**Note:** Replace `SP21-0X-gituser` accordingly.
 
 
 ### 19. Next, run the docker container.
