@@ -106,7 +106,7 @@ services:
 If you are planning to use this locally, copy the yaml text from above into `temp-docker.yaml`, then inject the environment variables with the following commands:
 
 ```
-#IF YOU DON'T HAVE UID OR GID ENV VARS, RUN THIS COMMAND. OTHERWISE SKIP.
+#IF YOU DON'T HAVE UID OR GID ENV VARS, RUN THIS COMMAND. SKIP OTHERWISE.
 export $(id | cut -d ' ' -f 1,2 | sed -e 's/([^()]*)//g' | tr '[:lower:]' '[:upper:]')
 
 eval "echo \"$(sed 's/"/\\"/g' temp-docker.yaml)\"" > docker-compose.yaml
