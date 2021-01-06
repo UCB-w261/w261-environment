@@ -13,7 +13,7 @@ Follow the link to create your own AWS Free-Tier Account. You are free to use an
 [AWS Console](https://signin.aws.amazon.com/signin?redirect_uri=https%3A%2F%2Fconsole.aws.amazon.com%2Fconsole%2Fhome%3Fstate%3DhashArgs%2523%26isauthcode%3Dtrue&client_id=arn%3Aaws%3Aiam%3A%3A015428540659%3Auser%2Fhomepage&forceMobileApp=0&code_challenge=iPW1qTfgSh0ngwqgY3ljo6sBAWwR2_lyXzDJXjPTAY4&code_challenge_method=SHA-256)
 
 
-### 2. Go to EC2 service and make sure you are in the N. California region (us-west-1).
+### 2. Go to EC2 service and make sure you are in the N. Virginia region (us-east-1).
 
 ![EC2](https://github.com/UCB-w261/w261-environment/blob/master/setup-aws-hadoop-env/step_01.png)
 
@@ -92,7 +92,7 @@ mv ~/Downloads/w261-ec2.pem .
 chmod 400 w261-ec2.pem
 ```
 
-**Note:** If using windows, follow this instructions: [Connecting to your EC2 using Windows ](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html). Also, make sure on the *SSH* settings *8889, 8080, 19888 and 4040* are being port-forward.
+**Note:** If using windows, follow this instructions: [Connecting to your EC2 using Windows ](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html). Also, make sure on the *SSH* settings *8889, 8080, 19888* are being port-forward.
 
 
 ### 17. Connect to your Instance with the copied command from *Step 15*, and add the following port-forwarding options:
