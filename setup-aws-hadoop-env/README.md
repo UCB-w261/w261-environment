@@ -107,32 +107,33 @@ ssh -i w261-ec2.pem ec2-user@<vm-public-ip-address> \
 **Note:** Replace `<vm-public-ip-address>` with your instance public ip address, i.e. *10-234-12-201*
 
 
-### 18. Once you are logged in, locate and go to the *main* repo, it should be in `/home/ec2-user/`. Clone your personal repo in this same location.
+### 18. Once you are logged in, locate the `run_this.sh` file, it should be in `/home/ec2-user/`. Execute this script like this:
 
 ```
-git clone https://github.com/UCB-w261/SP21-0X-gituser.git
+. run_script.sh
 ```
-**Note:** Replace `SP21-0X-gituser` accordingly.
+This will prompt to clone the `main` repo and pull/launch the container for the first time. Please be patient.
 
 
-### 19. Next, run the docker container.
-
-```
-cd main
-docker-compose up
-```
-
-
-### 20. After some output, your jupyter service should be up and accessible by clicking the following link:
+### 19. After some output, your jupyter service should be up and accessible by clicking the following link:
 
 [Jupyter Lab](http://localhost:8889 "Click here to open Jupyter Lab")
 
 
-### 21. Once in JupyterLab, make sure *AutoSave* feature is enabled.
+### 20. Once in JupyterLab, make sure *AutoSave* feature is enabled.
 
 ![Key Pair](https://github.com/UCB-w261/w261-environment/blob/master/setup-aws-hadoop-env/jupyter_lab_autosave.png)
 
+### 21. Go back to your terminal and `Ctrl + c` from the container and clone your personal repo. Make sure you do this outside the main folder.
+
+```
+cd ~
+git clone https://github.com/ucb-w261/sp21-<section>-<github-username>.git
+```
+**Note:** Substitute section and github username accordingly.
 
 ### 22. Make sure you shutdown your instance when not working on your homeworks. You will be using compute resources at 4x the pace (t2.xlarge), and could cost more than expected if left unattended.
 
 ![Stop Instance](https://github.com/UCB-w261/w261-environment/blob/master/setup-aws-hadoop-env/step_16.png)
+
+ 
