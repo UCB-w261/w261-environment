@@ -6,6 +6,12 @@ Follow the link to create your own AWS Free-Tier Account. You are free to use an
 
 [AWS Free-Tier](https://aws.amazon.com/free/?all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc)
 
+## AWS Educate
+
+Follow the link to explore the AWS Educate account. You will need an `.edu` email.
+
+[AWS Educate](https://aws.amazon.com/education/awseducate/)
+
 ## Create your Instance
 
 ### 1. Log into you AWS account using this link:
