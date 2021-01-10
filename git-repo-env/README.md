@@ -3,6 +3,9 @@
 ## How to setup W261 git environment
 
 - Follow these steps to point your local repo to remote personal repo:
+git remote rename origin upstream
+git remote add origin URL_TO_YOUR_OWN_REPO
+git push origin master
 
 ![alt text](./images/1.%20CloneRepo.png)
 
