@@ -16,7 +16,7 @@
 
 
 #### Also, make sure you add instructors and TAs to your personal repo:
-![alt text](./images/4.%20ManageRepoAcces.png)
+![alt text](./images/4.%20ManageRepoAccess.png)
 
 #### Last, make sure your remote personal repo is private:
 ![alt text](./images/5.PrivateRepo.png)
