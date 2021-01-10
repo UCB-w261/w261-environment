@@ -2,10 +2,10 @@
 
 ## How to setup W261 git environment
 
-- Follow these steps to point your local repo to remote personal repo:
-git remote rename origin upstream
-git remote add origin URL_TO_YOUR_OWN_REPO
-git push origin master
+*Follow these steps to point your local repo to remote personal repo:*
+- git remote rename origin upstream
+- git remote add origin URL_TO_YOUR_OWN_REPO
+- git push origin master
 
 ![alt text](./images/1.%20CloneRepo.png)
 
@@ -18,8 +18,8 @@ git push origin master
 ![alt text](./images/3.%20CheckGitStatus.png)
 
 
-#### Also, make sure you add instructors and TAs to your personal repo:
+*Note 1: To add collaborators:*
 ![alt text](./images/4.%20ManageRepoAccess.png)
 
-#### Last, make sure your remote personal repo is private:
+*Note 2: To proect your code, make sure your remote personal repo is private:*
 ![alt text](./images/5.PrivateRepo.png)
