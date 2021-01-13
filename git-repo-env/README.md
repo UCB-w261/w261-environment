@@ -18,8 +18,3 @@
 ![alt text](./images/3.%20CheckGitStatus.png)
 
 
-*Note 1: To add collaborators:*
-![alt text](./images/4.%20ManageRepoAccess.png)
-
-*Note 2: To proect your code, make sure your remote personal repo is private:*
-![alt text](./images/5.PrivateRepo.png)
