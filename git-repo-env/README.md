@@ -3,6 +3,9 @@
 ## How to setup W261 git environment
 
 *Follow these steps to point your local repo to remote personal repo:*
+
+In this setup 'local' is where container runs, 'remote' is Github repository. 
+
 - git remote rename origin upstream
 - git remote add origin URL_TO_YOUR_OWN_REPO
 - git push origin master
