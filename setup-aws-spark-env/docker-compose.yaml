@@ -13,7 +13,7 @@ services:
       - NB_GID=500
     command: bash -c "start.sh jupyter lab --LabApp.token='' --LabApp.authenticate_prometheus=False --LabApp.port=8889"
     ports:
-      - "8888:8888"
+      - "8889:8889"
       - "4040:4040"
     tty: true
     stdin_open: true
