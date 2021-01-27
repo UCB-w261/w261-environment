@@ -14,7 +14,7 @@ services:
     command: bash -c "start.sh jupyter lab --LabApp.token='' --LabApp.authenticate_prometheus=False --LabApp.port=8889"
     ports:
       - "8889:8889"
-      - "4040:4040"
+      - "4040-4049:4040-4049"
     tty: true
     stdin_open: true
     volumes:
