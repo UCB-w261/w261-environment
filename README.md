@@ -92,7 +92,7 @@ services:
       - GRANT_SUDO=yes
       - NB_UID=$UID
       - NB_GID=$GID
-    command: bash -c "start.sh jupyter lab --LabApp.token='' --LabApp.authenticate_prometheus=False --LabApp.portInt=8889"
+    command: bash -c "start.sh jupyter lab --ServerApp.token='' --ServerApp.authenticate_prometheus=False --ServerApp.port=8889"
     ports:
       - "8889:8889"
       - "4040:4040"
