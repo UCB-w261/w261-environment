@@ -31,7 +31,7 @@ https://portal.azure.com/
 
 ```
 az group create --name w261 --location westus
-az vm create -g w261 -n w261 --size Standard_E2s_v3 --image debian --public-ip-address-dns-name w261-vm-<use your id or something unique here>
+az vm create -g w261 -n w261 --size Standard_E2s_v3 --image debian --storage-sku Standard_LRS --public-ip-address-dns-name w261-vm-<use your id or something unique here>
 ```
 
 5. Then setup your password for VM access, replace "<setup your password>" with your password
