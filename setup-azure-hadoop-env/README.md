@@ -1,6 +1,6 @@
 # Setting Up your VM for Hadoop
 
-## Azure Student Creidt
+## Azure Student Credit
 
 Microsoft Azure provides $100 credit for students valid for 12 months. You will be asked to provide your school email address and name. An email will be sent to you to confirm these details before a coupon is sent to you:
 
