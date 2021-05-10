@@ -45,7 +45,17 @@ az vm user update -u azureuser -p <setup your password> -n w261 -g w261
 ![alt text](./03-VM-dns.jpg "Create VM")
 
 7. Now use SSH client on your local laptop and log into the new VM:
-ssh azureuser@<your VM public DNS>
+
+```
+ssh w261 \
+  --ssh-flag="-L 8889:127.0.0.1:8889" \
+  --ssh-flag="-L 8088:127.0.0.1:8088" \
+  --ssh-flag="-L 19888:127.0.0.1:19888" \
+  --ssh-flag="-L 4040:127.0.0.1:4040" \
+  --ssh-flag="-L 41537:127.0.0.1:41537"
+```
+
+
 
 ## Setup Docker
 
@@ -74,16 +84,6 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
+
 ## Connect to Jupyter Lab
-### Important: All of this happens in your local computer.
-
-After the green check mark shows next to your newly instantiated VM, you can go back to your local Terminal shell window, Google Cloud SDK Shell for Windows users, and run this command to connect to your VM:
-
-```
-ssh w261 \
-  --ssh-flag="-L 8889:127.0.0.1:8889" \
-  --ssh-flag="-L 8088:127.0.0.1:8088" \
-  --ssh-flag="-L 19888:127.0.0.1:19888" \
-  --ssh-flag="-L 4040:127.0.0.1:4040" \
-  --ssh-flag="-L 41537:127.0.0.1:41537"
-```
+Now run Docker Compose to run Hadoop cluster
