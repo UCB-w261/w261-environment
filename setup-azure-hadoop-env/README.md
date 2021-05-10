@@ -42,7 +42,7 @@ az vm user update -u azureuser -p <setup your password> -n w261 -g w261
 
 6. When VM is created, the fqdns is the public VM url you will need to connect to the VM from your laptop
 
-![alt text](./003-VM-dns.jpg "Create VM")
+![alt text](./03-VM-dns.jpg "Create VM")
 
 7. Now use SSH client on your local laptop and log into the new VM:
 ssh azureuser@<your VM public DNS>
