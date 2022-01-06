@@ -40,7 +40,9 @@ gcloud compute instances create w261 \
 You might need to adjust the argument for `--zone`, again, to match what you set on `gcloud init`.
 
 Note: If using an account other than your `berkeley.edu`, drop the `--create-disk` line, and follow these instructions to install Docker and Docker Compose:
+
 [Install Docker](https://docs.docker.com/engine/install/debian/ "Install Docker")
+
 [Install Docker Compose](https://docs.docker.com/compose/install/ "Install Docker Compose")
 
 5. Close the Cloud Shell window by running `exit` once the you get the prompt back.
