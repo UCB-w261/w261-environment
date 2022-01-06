@@ -16,7 +16,7 @@ GCP is offering $300 in credits for new accounts. Strongly recommended to use yo
 
 3. Click on the Cloud Shell icon.
 
-![alt text](https://github.com/UCB-w261/w261-environment/blob/master/setup-new-hadoop-env/cloud_shell.png "Cloud Shell")
+![alt text](https://github.com/UCB-w261/w261-environment/blob/master/setup-gcp-hadoop-env/cloud_shell.png "Cloud Shell")
 
 4. It might take a few minutes if it's the first time. Pay attention what `Project ID` is showing on top of the Cloud Shell window. This should match when you setup your `gcloud init` configuration locally. If you don't see a project id in the output from the Cloud Shell, then you need to select a project in your web console by clicking the item circled in red as shown in the image from Step 2.
 
