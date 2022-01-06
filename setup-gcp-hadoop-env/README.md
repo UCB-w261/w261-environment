@@ -26,7 +26,7 @@ The real project id is obtained in the pop-up window.
 
 ```
 gcloud compute instances create w261 \
-  --project=w261-trusted-images \
+  --project=$GOOGLE_CLOUD_PROJECT \
   --zone=us-central1-a \
   --machine-type=n2-standard-4 \
   --network-interface=subnet=default,no-address \
@@ -38,6 +38,10 @@ gcloud compute instances create w261 \
   --reservation-affinity=any
 ```
 You might need to adjust the argument for `--zone`, again, to match what you set on `gcloud init`.
+
+Note: If using an account other than your `berkeley.edu`, drop the `--create-disk` line, and follow these instructions to install Docker and Docker Compose:
+[Install Docker](https://docs.docker.com/engine/install/debian/ "Install Docker")
+[Install Docker Compose](https://docs.docker.com/compose/install/ "Install Docker Compose")
 
 5. Close the Cloud Shell window by running `exit` once the you get the prompt back.
 
