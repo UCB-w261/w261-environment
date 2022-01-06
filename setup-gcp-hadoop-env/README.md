@@ -116,6 +116,13 @@ Here is the best place to `git clone https://github.com/UCB...` the repos needed
 
 For students using Windows, the Google Cloud SDK opens a PuTTY window, sometimes might be behind your active windows.
 
+5. You might need to repeat Steps 7-10 from above if a different user is created in the VM (most likely this will happen). Either or, re-launch your container by running:
+```
+docker-compose up
+```
+
+6. Open Jupyter by clicking the link below:
+
 [Jupyter Lab](http://localhost:8889 "Click here to open Jupyter Lab")
 
 Note: Make sure you don't have other services, like `jupyter notebook` or the w261 Docker container itself, running locally. You might be working in the wrong place.
