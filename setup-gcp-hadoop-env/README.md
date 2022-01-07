@@ -89,9 +89,36 @@ export ID=1001
 export GID=1000
 ```
 
-11. Create your `docker-compose.yaml` file.
+11a. Only for berkeley.edu accounts. Create your `docker-compose.yaml` file.
 ```
 cat ../w261/docker-compose.tmp | envsubst > docker-compose.yaml
+```
+
+11b. Copy and run the following command in the web-SSH:
+```
+cat > docker-compose.yaml << EOF
+version: '3'
+services:
+  spark:
+    image: jupyter/pyspark-notebook
+    hostname: docker.w261
+    privileged: true
+    user: root
+    environment:
+      - NB_USER=$USER
+      - CHOWN_HOME=yes
+      - GRANT_SUDO=yes
+      - NB_UID=$ID
+      - NB_GID=$GID
+    command: bash -c "start.sh jupyter lab --ServerApp.token='' --ServerApp.authenticate_prometheus=False --ServerApp.port=8889"
+    ports:
+      - "8889:8889"
+      - "4040:4040"
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/home/$USER
+EOF
 ```
 
 12. Confirm you don't have missing values in the yaml:
