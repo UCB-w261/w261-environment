@@ -39,7 +39,7 @@ gcloud compute instances create w261 \
 ```
 You might need to adjust the argument for `--zone`, again, to match what you set on `gcloud init`.
 
-Note: If using an account other than your `berkeley.edu`, drop the `--create-disk` line, and follow these instructions to install Docker and Docker Compose:
+Note: If using an account other than your `berkeley.edu`, drop the `--create-disk` line, and follow these instructions to install Docker and Docker Compose once you are inside the VM:
 
 [Install Docker](https://docs.docker.com/engine/install/debian/ "Install Docker")
 
@@ -49,12 +49,36 @@ Note: If using an account other than your `berkeley.edu`, drop the `--create-dis
 
 6. Go to the main menu -> Compute Engine. Once the VM is showing as `Running`, click on the SSH button showing on the right. Click on "Connect".
 
-7. Run this command in order to be able to run `docker` without `sudo`:
+7. As a best practice, you should always run an update on your VM. Since it's a Debian distro, run the following command:
+```
+sudo apt-get update
+```
+
+NOTE: If you followed the `gcloud` command above, you'll notice that the command times out. GCP isolates your VM from the outside world if you don't provide an External IP to your VM. This is the setup that we want to follow best practices in Cloud Security. We could always get tighter, but it's enough to keep unwanted Crypto-Miners out of your VM.
+
+8. Setup a NAT Gateway to open a secure channel for your VM to access the internet. This is needed for updating the Debian packages, install Docker, clone your repos, etc.
+  - Keep the web-SSH window open
+  - Go to [console](console.cloud.google.com) Main Menu -> Networking -> Network Services -> Cloud NAT. Click on the "Get Started" button in the central window.
+  - Name it `nat-us-central-1`
+  - Select `default` network
+  - Region `us-central1`, or the one that matches your VM region
+  - Create a new Cloud Router
+    - Name it `router-us-central1`
+    - Keep default values for the rest of the settings
+    - Create Cloud Router
+  - Keep default values for the rest of the settings
+  - Create NAT Gateway
+  - Try again the update command and keep an eye when the NAT gateway is shown as `Running`. The update command will start pulling updates as soon as the gateway opens. Run it again, just to make sure you get the message that VM is up to date.
+  - OPTIONAL: Install Docker if needed.
+
+9. Run this command in order to be able to run `docker` without `sudo`:
 ```
 sudo usermod -aG docker $USER
 ```
+  - Type `exit` and re-open the web-SSH in order to put the change into effect.
+  - OPTIONAL: Test by running `docker run hello-world`
 
-8. Create 2 Environment Variables with the values from `id` command:
+10. Create 2 Environment Variables with the values from `id` command:
 ```
 id
 
@@ -65,30 +89,32 @@ export ID=1001
 export GID=1000
 ```
 
-9. Create your `docker-compose.yaml` file.
+11. Create your `docker-compose.yaml` file.
 ```
 cat ../w261/docker-compose.tmp | envsubst > docker-compose.yaml
 ```
 
-10. Confirm you don't have missing values in the yaml:
+12. Confirm you don't have missing values in the yaml:
 ```
 cat docker-compose.yaml
 ```
 
-11. Test it!
+13. Test it!
 ```
 docker-compose up
 ```
 
-12. Exit container by pressing `ctrl + c`, and exit shell by typing `exit`.
+14. Exit container by pressing `ctrl + c`, and exit shell by typing `exit`.
 
 ## Connect to Jupyter Lab
 ### Important: Use your local computer for the rest of the steps.
 
-1. Install Google Cloud SDK.
+1. Install Google Cloud SDK, follow the instructions that correspond to your system:
 
 [MacOS](https://cloud.google.com/sdk/docs/install#mac "MacOS")
+
 [Windows](https://cloud.google.com/sdk/docs/install#windows "Windows")
+
 [Linux](https://cloud.google.com/sdk/docs/install#linux "Linux)
 
 2. Open your Terminal (MacOS, Linux) or click on the Google Cloud SDK icon installed in your Desktop (Windows)
