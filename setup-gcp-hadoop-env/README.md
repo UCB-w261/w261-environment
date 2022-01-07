@@ -22,7 +22,7 @@ GCP is offering $300 in credits for new accounts. Strongly recommended to use yo
 
 The real project id is obtained in the pop-up window.
 
-4. Run the following command:
+5. Run the following command:
 
 ```
 gcloud compute instances create w261 \
@@ -45,18 +45,18 @@ Note: If using an account other than your `berkeley.edu`, drop the `--create-dis
 
 [Install Docker Compose](https://docs.docker.com/compose/install/ "Install Docker Compose")
 
-5. Close the Cloud Shell window by running `exit` once the you get the prompt back.
+6. Close the Cloud Shell window by running `exit` once the you get the prompt back.
 
-6. Go to the main menu -> Compute Engine. Once the VM is showing as `Running`, click on the SSH button showing on the right. Click on "Connect".
+7. Go to the main menu -> Compute Engine. Once the VM is showing as `Running`, click on the SSH button showing on the right. Click on "Connect".
 
-7. As a best practice, you should always run an update on your VM. Since it's a Debian distro, run the following command:
+8. As a best practice, you should always run an update on your VM. Since it's a Debian distro, run the following command:
 ```
 sudo apt-get update
 ```
 
 NOTE: If you followed the `gcloud` command above, you'll notice that the command times out. GCP isolates your VM from the outside world if you don't provide an External IP to your VM. This is the setup that we want to follow best practices in Cloud Security. We could always get tighter, but it's enough to keep unwanted Crypto-Miners out of your VM.
 
-8. Setup a NAT Gateway to open a secure channel for your VM to access the internet. This is needed for updating the Debian packages, install Docker, clone your repos, etc.
+9. Setup a NAT Gateway to open a secure channel for your VM to access the internet. This is needed for updating the Debian packages, install Docker, clone your repos, etc.
   - Keep the web-SSH window open
   - Go to [console](console.cloud.google.com) Main Menu -> Networking -> Network Services -> Cloud NAT. Click on the "Get Started" button in the central window.
   - Name it `nat-us-central-1`
@@ -71,14 +71,14 @@ NOTE: If you followed the `gcloud` command above, you'll notice that the command
   - Try again the update command and keep an eye when the NAT gateway is shown as `Running`. The update command will start pulling updates as soon as the gateway opens. Run it again, just to make sure you get the message that VM is up to date.
   - OPTIONAL: Install Docker if needed.
 
-9. Run this command in order to be able to run `docker` without `sudo`:
+10. Run this command in order to be able to run `docker` without `sudo`:
 ```
 sudo usermod -aG docker $USER
 ```
   - Type `exit` and re-open the web-SSH in order to put the change into effect.
   - OPTIONAL: Test by running `docker run hello-world`
 
-10. Create 2 Environment Variables with the values from `id` command:
+11. Create 2 Environment Variables with the values from `id` command:
 ```
 id
 
@@ -89,12 +89,12 @@ export ID=1001
 export GID=1000
 ```
 
-11a. Only for berkeley.edu accounts. Create your `docker-compose.yaml` file.
+12a. Only for berkeley.edu accounts. Create your `docker-compose.yaml` file.
 ```
 cat ../w261/docker-compose.tmp | envsubst > docker-compose.yaml
 ```
 
-11b. Copy and run the following command in the web-SSH:
+12b. Copy and run the following command in the web-SSH:
 ```
 cat > docker-compose.yaml << EOF
 version: '3'
@@ -121,17 +121,17 @@ services:
 EOF
 ```
 
-12. Confirm you don't have missing values in the yaml:
+13. Confirm you don't have missing values in the yaml:
 ```
 cat docker-compose.yaml
 ```
 
-13. Test it!
+14. Test it!
 ```
 docker-compose up
 ```
 
-14. Exit container by pressing `ctrl + c`, and exit shell by typing `exit`.
+15. Exit container by pressing `ctrl + c`, and exit shell by typing `exit`.
 
 ## Connect to Jupyter Lab
 ### Important: Use your local computer for the rest of the steps.
