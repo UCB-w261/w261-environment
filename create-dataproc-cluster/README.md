@@ -16,6 +16,8 @@ All notebooks can be run using this cluster, you can run Bash/Python and Spark n
 - If using Berkeley account, you need to place this Project under the *Learning* folder.
 - Create.
 
+![alt text](https://github.com/UCB-w261/w261-environment/blob/master/gcp-images/project-id.png "Project")
+
 ### Setup Cluster Using Cloud Shell
 
 NOTE: Feel free to skip some of the steps if you already setup some of the items if you went through the instructions to setup a VM for class.
@@ -23,6 +25,8 @@ NOTE: Feel free to skip some of the steps if you already setup some of the items
 Once your Project is ready...
 
 - Open the *Cloud Shell* by clicking the `>-` icon near the top right corner. It might take a few minutes if this is the first time. *Cloud Shell* is a Serverless shell that has your individual permissions (in this case you are a project owner), so it really simple and fast to run `gcloud` commands to deploy cloud services.
+
+![alt text](https://github.com/UCB-w261/w261-environment/blob/master/gcp-images/cloud_shell.png "Cloud Shell")
 
 - Enable APIs
 ```
