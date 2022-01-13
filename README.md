@@ -19,64 +19,26 @@ Using Docker we can keep a fresh deployment of our Hadoop/Jupyter/Spark environm
 
 Download Docker Community Edition from [Docker](https://docs.docker.com/engine/installation/ "Docker Install Documentation")
 
-## Pull the Class Image
-
-```
-# Hadoop Environment
-docker pull w261/w261-environment
-```
-
 ## Things to know
 
-In the container for W261 we use docker-compose to build our container. This yaml will be used for HW1 and HW2.
+We will use `docker-compose` to deploy our container with the proper configuration of user ownership, volume mounts, etc.
 
-```
-version: '3'
-services:
-  quickstart.cloudera:
-    image: w261/w261-environment:latest
-    hostname: docker.w261
-    privileged: true
-    command: bash -c "/root/start-notebook.sh;/usr/bin/docker-quickstart"
-    ports:
-      - "8888:8888"   # Hue server
-      - "8889:8889"   # jupyter
-      - "10020:10020" # mapreduce job history server
-      - "8022:22"     # ssh
-      - "7180:7180"   # Cloudera Manager
-      - "11000:11000" # Oozie
-      - "50070:50070" # HDFS REST Namenode
-      - "50075:50075" # HDFS REST Datanode
-      - "8088:8088"   # yarn resource manager webapp address
-      - "19888:19888" # mapreduce job history webapp address
-      - "8983:8983"   # Solr console
-      - "8032:8032"   # yarn resource manager access
-      - "8042:8042"   # yarn node manager
-      - "60010:60010" # hbase
-      - "8080:8080"   # Hadoop Job Tracker
-    tty: true
-    stdin_open: true
-    volumes: 
-      - .:/media/notebooks
-```
-
-- version: this item says use v2 syntax
+- version: this item says use v3 syntax
 - services: list of containers
-  - quickstart.cloudera: the name of a container, the label being quickstart.cloudera
+  - spark: the name of a container, the label being spark
     - image: use this base container
     - hostname: DNS name for the container
     - privledged: allow access to other machines such as the local machine
-    - commands: run this commands on start
+    - user: root user privileges
+    - environment:
+      - values to not conflict ownership of files both inside and outisde the container
+    - commands: runs this commands on start
     - ports: map ports so that services running on the container are accessible from the local computer
       - remote port:local port
     - tty: allow a shell to be initiated
     - stdin_open: allow interactivity with the shell
     - volumes: location to map from local computer to the docker container so they can share. 
       - /local/path:/media/notebook
-
-If we review the bash scripts `startup.sh` we can see that the jupyter notebook is launched from the `/media/notebook` directory. This is very important for our deployment.
-
-For HW3 and HW4 we will use this `docker-compose.yaml`:
 
 ```
 version: '3'
