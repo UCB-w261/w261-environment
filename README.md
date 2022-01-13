@@ -77,6 +77,10 @@ eval "echo \"$(sed 's/"/\\"/g' temp-docker.yaml)\"" > docker-compose.yaml
 rm temp-docker.yaml
 ```
 
+## NOTE: For all notebooks related to Hadoop, please follow this instructions to create a Dataproc cluster.
+
+[Create a Dataproc cluster](https://github.com/UCB-w261/w261-environment/create-dataproc-cluster/README.md)]
+
 ## How to Use
 
 1. Install Docker (Restart as needed)
