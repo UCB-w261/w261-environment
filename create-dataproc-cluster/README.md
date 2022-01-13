@@ -101,5 +101,5 @@ gcloud dataproc clusters describe w261 --region ${REGION} | grep JupyterLab
 !mkdir -p data/
 !gsutil cp gs://w261-hw-data/main/Assignments/HW2/data/* data/
 ```
-Feel free to explore where the data is for a specific HW with `gsutil ls gs://w261-hw-data/main/Assignments/HW3`
+Feel free to explore where the data is for a specific HW with `gsutil ls gs://w261-hw-data/main/Assignments/HW*`
 
