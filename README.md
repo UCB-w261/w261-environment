@@ -52,7 +52,7 @@ services:
       - NB_USER=$USER
       - CHOWN_HOME=yes
       - GRANT_SUDO=yes
-      - NB_UID=$UID
+      - NB_UID=$ID
       - NB_GID=$GID
     command: bash -c "start.sh jupyter lab --ServerApp.token='' --ServerApp.authenticate_prometheus=False --ServerApp.port=8889"
     ports:
