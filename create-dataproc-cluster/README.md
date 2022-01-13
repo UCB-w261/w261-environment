@@ -24,7 +24,7 @@ NOTE: Feel free to skip some of the steps if you already setup some of the items
 
 Once your Project is ready...
 
-- Open the *Cloud Shell* by clicking the `>-` icon near the top right corner. It might take a few minutes if this is the first time. *Cloud Shell* is a Serverless shell that has your individual permissions (in this case you are a project owner), so it really simple and fast to run `gcloud` commands to deploy cloud services.
+- Open the *Cloud Shell* by clicking the `>_` icon near the top right corner. It might take a few minutes if this is the first time. *Cloud Shell* is a Serverless shell that has your individual permissions (in this case you are a project owner), so it really simple and fast to run `gcloud` commands to deploy cloud services.
 
 ![alt text](https://github.com/UCB-w261/w261-environment/blob/master/gcp-images/cloud_shell.png "Cloud Shell")
 
