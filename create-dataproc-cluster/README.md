@@ -103,3 +103,7 @@ gcloud dataproc clusters describe w261 --region ${REGION} | grep JupyterLab
 ```
 Feel free to explore where the data is for a specific HW with `gsutil ls gs://w261-hw-data/main/Assignments/HW*`
 
+- For Hadoop, the new location of the `JAR_FILE` is:
+```
+JAR_FILE = '/usr/lib/hadoop/hadoop-streaming-3-3-2.jar'
+```
