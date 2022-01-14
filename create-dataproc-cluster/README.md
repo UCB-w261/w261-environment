@@ -107,3 +107,7 @@ Feel free to explore where the data is for a specific HW with `gsutil ls gs://w2
 ```
 JAR_FILE = '/usr/lib/hadoop/hadoop-streaming-3.2.2.jar'
 ```
+
+- For debugging, go to Dataproc -> Clusters -> Web Interfaces and look for:
+  - MapReduce History Server for Hadoop job logs.
+  - Spark History Server for Spark job logs.
