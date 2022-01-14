@@ -105,5 +105,5 @@ Feel free to explore where the data is for a specific HW with `gsutil ls gs://w2
 
 - For Hadoop, the new location of the `JAR_FILE` is:
 ```
-JAR_FILE = '/usr/lib/hadoop/hadoop-streaming-3-3-2.jar'
+JAR_FILE = '/usr/lib/hadoop/hadoop-streaming-3.2.2.jar'
 ```
