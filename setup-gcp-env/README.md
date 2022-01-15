@@ -18,7 +18,7 @@ GCP is offering $300 in credits for new accounts. Strongly recommended to use yo
 
 ![alt text](https://github.com/UCB-w261/w261-environment/blob/master/gcp-images/cloud_shell.png "Cloud Shell")
 
-4. It might take a few minutes if it's the first time. Pay attention what `Project ID` is showing on top of the Cloud Shell window. This should match when you setup your `gcloud init` configuration locally. If you don't see a project id in the output from the Cloud Shell, then you need to select a project in your web console by clicking the item circled in red as shown in the image from Step 2.
+4. It might take a few minutes if it's the first time. Pay attention what `Project ID` is showing on top of the Cloud Shell window. This should match when you setup your `gcloud init` configuration locally (see the [Jupyter Lab section below](#Connect-to-Jupyter-Lab) for more details on `gcloud init`). If you don't see a project id in the output from the Cloud Shell, then you need to select a project in your web console by clicking the item circled in red as shown in the image from Step 2.
 
 The real project id is obtained in the pop-up window.
 
@@ -37,48 +37,52 @@ gcloud compute instances create w261 \
   --shielded-integrity-monitoring \
   --reservation-affinity=any
 ```
+
 You might need to adjust the argument for `--zone`, again, to match what you set on `gcloud init`.
 
-Note: If using an account other than your `berkeley.edu`, drop the `--create-disk` line, and follow these instructions to install Docker and Docker Compose once you are inside the VM:
+Note: If using an account other than your `berkeley.edu`, drop the `--create-disk` line, and follow the instructions in step 8 to install Docker and Docker Compose once you are inside the VM:
 
-[Install Docker](https://docs.docker.com/engine/install/debian/ "Install Docker")
+6. Close the Cloud Shell window by running `exit` once you get the prompt back.
 
-[Install Docker Compose](https://docs.docker.com/compose/install/ "Install Docker Compose")
+7. GCP isolates your VM from the outside world if you don't provide an External IP to your VM. This is the setup that we want to follow best practices in Cloud Security. We could always get tighter, but it's enough to keep unwanted Crypto-Miners out of your VM.
+   Setup a NAT Gateway to open a secure channel for your VM to access the internet. This is needed for updating the Debian packages, install Docker, clone your repos, etc.
 
-6. Close the Cloud Shell window by running `exit` once the you get the prompt back.
+- Go to [console](console.cloud.google.com) Main Menu -> Networking -> Network Services -> Cloud NAT. Click on the "Get Started" button in the central window.
+- Name it `nat-us-central-1`
+- Select `default` network
+- Region `us-central1`, or the one that matches your VM region
+- Create a new Cloud Router
+    - Name it `router-us-central1`
+    - Keep default values for the rest of the settings
+    - Create Cloud Router
+- Keep default values for the rest of the settings
+- Create NAT Gateway
+- Make sure the NAT gateway is shown as `Running` before completing the next steps.
 
-7. Go to the main menu -> Compute Engine. Once the VM is showing as `Running`, click on the SSH button showing on the right. Click on "Connect".
+8. OPTIONAL: Install Docker if needed (i.e. if you are using a non-Berkeley gmail).
 
-8. As a best practice, you should always run an update on your VM. Since it's a Debian distro, run the following command:
+* [Install Docker](https://docs.docker.com/engine/install/debian/ "Install Docker")
+* [Install Docker Compose](https://docs.docker.com/compose/install/ "Install Docker Compose")
+
+9. Go to the main menu -> Compute Engine. Once the VM is showing as `Running`, click on the SSH button showing on the right. Click on "Connect".
+
+10. As a best practice, you should always run an update on your VM. Since it's a Debian distro, run the following command:
+
 ```
 sudo apt-get update
 ```
 
-NOTE: If you followed the `gcloud` command above, you'll notice that the command times out. GCP isolates your VM from the outside world if you don't provide an External IP to your VM. This is the setup that we want to follow best practices in Cloud Security. We could always get tighter, but it's enough to keep unwanted Crypto-Miners out of your VM.
+11. Run this command in order to be able to run `docker` without `sudo`:
 
-9. Setup a NAT Gateway to open a secure channel for your VM to access the internet. This is needed for updating the Debian packages, install Docker, clone your repos, etc.
-  - Keep the web-SSH window open
-  - Go to [console](console.cloud.google.com) Main Menu -> Networking -> Network Services -> Cloud NAT. Click on the "Get Started" button in the central window.
-  - Name it `nat-us-central-1`
-  - Select `default` network
-  - Region `us-central1`, or the one that matches your VM region
-  - Create a new Cloud Router
-    - Name it `router-us-central1`
-    - Keep default values for the rest of the settings
-    - Create Cloud Router
-  - Keep default values for the rest of the settings
-  - Create NAT Gateway
-  - Try again the update command and keep an eye when the NAT gateway is shown as `Running`. The update command will start pulling updates as soon as the gateway opens. Run it again, just to make sure you get the message that VM is up to date.
-  - OPTIONAL: Install Docker if needed.
-
-10. Run this command in order to be able to run `docker` without `sudo`:
 ```
 sudo usermod -aG docker $USER
 ```
+
   - Type `exit` and re-open the web-SSH in order to put the change into effect.
   - OPTIONAL: Test by running `docker run hello-world`
 
-11. Create 2 Environment Variables with the values from `id` command:
+12. Create 2 Environment Variables with the values from `id` command:
+
 ```
 id
 
@@ -122,6 +126,7 @@ EOF
 ```
 
 13. Confirm you don't have missing values in the yaml:
+
 ```
 cat docker-compose.yaml
 ```
@@ -133,6 +138,24 @@ docker-compose up
 
 15. Exit container by pressing `ctrl + c`, and exit shell by typing `exit`.
 
+## Non-Google-Workspace Accounts
+
+This goes mostly for students that had to use their `gmail` account in order to get the credits.
+
+1. Find you ssh Public Key, typically in `~/.ssh/google_compute_engine.pub`
+
+2. Upload the key to the Metadata server:
+```
+gcloud compute os-login ssh-keys add \
+    --project PROJECT_ID \
+    --key-file /home/$USER/.ssh/google_compute_engine.pub
+```
+
+3. Specify key, if necessary, when ssh'ing to the VM:
+```
+gcloud compute ssh w261 --ssh-key-file=/home/$USER/.ssh/google_compute_engine ...
+```
+
 ## Connect to Jupyter Lab
 ### Important: Use your local computer for the rest of the steps.
 
@@ -142,7 +165,7 @@ docker-compose up
 
 [Windows](https://cloud.google.com/sdk/docs/install#windows "Windows")
 
-[Linux](https://cloud.google.com/sdk/docs/install#linux "Linux)
+[Linux](https://cloud.google.com/sdk/docs/install#linux "Linux")
 
 2. Open your Terminal (MacOS, Linux) or click on the Google Cloud SDK icon installed in your Desktop (Windows)
 
@@ -179,24 +202,6 @@ docker-compose up
 [Jupyter Lab](http://localhost:8889 "Click here to open Jupyter Lab")
 
 Note: Make sure you don't have other services, like `jupyter notebook` or the w261 Docker container itself, running locally. You might be working in the wrong place.
-
-## Non-Google-Workspace Accounts
-
-This goes mostly for students that had to use their `gmail` account in order to get the credits.
-
-1. Find you ssh Public Key, typically in `~/.ssh/google_compute_engine.pub`
-
-2. Upload the key to the Metadata server:
-```
-gcloud compute os-login ssh-keys add \
-    --project PROJECT_ID \
-    --key-file /home/$USER/.ssh/google_compute_engine.pub
-```
-
-3. Specify key, if necessary, when ssh'ing to the VM:
-```
-gcloud compute ssh w261 --ssh-key-file=/home/$USER/.ssh/google_compute_engine ...
-```
 
 ## Discipline
 
