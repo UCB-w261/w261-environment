@@ -20,7 +20,7 @@ GCP is offering $300 in credits for new accounts. Strongly recommended to use yo
 
 4. It might take a few minutes if it's the first time. Pay attention what `Project ID` is showing on top of the Cloud Shell window. This should match when you setup your `gcloud init` configuration locally (see the [Jupyter Lab section below](#Connect-to-Jupyter-Lab) for more details on `gcloud init`). If you don't see a project id in the output from the Cloud Shell, then you need to select a project in your web console by clicking the item circled in red as shown in the image from Step 2.
 
- The real project id is obtained in the pop-up window.
+The real project id is obtained in the pop-up window.
 
 5. Run the following command:
 
@@ -38,12 +38,15 @@ gcloud compute instances create w261 \
   --reservation-affinity=any
 ```
 
- You might need to adjust the argument for `--zone`, again, to match what you set on `gcloud init`.
+You might need to adjust the argument for `--zone`, again, to match what you set on `gcloud init`.
 
- Note: If using an account other than your `berkeley.edu`, drop the `--create-disk` line, and follow the instructions in step 7 to install Docker and Docker Compose once you are inside the VM:
+Note: If using an account other than your `berkeley.edu`, drop the `--create-disk` line, and follow the instructions in step 8 to install Docker and Docker Compose once you are inside the VM:
 
-6. Setup a NAT Gateway to open a secure channel for your VM to access the internet. This is needed for updating the Debian packages, install Docker, clone your repos, etc.
-- Keep the web-SSH window open
+6. Close the Cloud Shell window by running `exit` once you get the prompt back.
+
+7. GCP isolates your VM from the outside world if you don't provide an External IP to your VM. This is the setup that we want to follow best practices in Cloud Security. We could always get tighter, but it's enough to keep unwanted Crypto-Miners out of your VM.
+   Setup a NAT Gateway to open a secure channel for your VM to access the internet. This is needed for updating the Debian packages, install Docker, clone your repos, etc.
+
 - Go to [console](console.cloud.google.com) Main Menu -> Networking -> Network Services -> Cloud NAT. Click on the "Get Started" button in the central window.
 - Name it `nat-us-central-1`
 - Select `default` network
@@ -54,14 +57,12 @@ gcloud compute instances create w261 \
     - Create Cloud Router
 - Keep default values for the rest of the settings
 - Create NAT Gateway
-- Try again the update command and keep an eye when the NAT gateway is shown as `Running`. The update command will start pulling updates as soon as the gateway opens. Run it again, just to make sure you get the message that VM is up to date. 
+- Make sure the NAT gateway is shown as `Running` before completing the next steps.
 
-7. OPTIONAL: Install Docker if needed.
+8. OPTIONAL: Install Docker if needed (i.e. if you are using a non-Berkeley gmail).
 
 * [Install Docker](https://docs.docker.com/engine/install/debian/ "Install Docker")
 * [Install Docker Compose](https://docs.docker.com/compose/install/ "Install Docker Compose")
-
-8. Close the Cloud Shell window by running `exit` once the you get the prompt back.
 
 9. Go to the main menu -> Compute Engine. Once the VM is showing as `Running`, click on the SSH button showing on the right. Click on "Connect".
 
@@ -70,8 +71,6 @@ gcloud compute instances create w261 \
 ```
 sudo apt-get update
 ```
-
- NOTE: If you followed the `gcloud` command above, you'll notice that the command times out. GCP isolates your VM from the outside world if you don't provide an External IP to your VM. This is the setup that we want to follow best practices in Cloud Security. We could always get tighter, but it's enough to keep unwanted Crypto-Miners out of your VM.
 
 11. Run this command in order to be able to run `docker` without `sudo`:
 
