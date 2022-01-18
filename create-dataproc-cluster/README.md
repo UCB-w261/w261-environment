@@ -109,7 +109,7 @@ JAR_FILE = '/usr/lib/hadoop/hadoop-streaming-3.2.2.jar'
 ```
 
 - For debugging, go to Dataproc -> Clusters -> Web Interfaces and look for:
-  - MapReduce History Server for Hadoop job logs.
+  - MapReduce Job History for Hadoop job logs.
   - Spark History Server for Spark job logs.
 
 - In Jupyter, when running `mkdir` use `-p` to make sure you create the entire path, if inner folders doesn't exist.
