@@ -80,7 +80,7 @@ gcloud dataproc clusters create w261 \
 
 Wait a few minutes until it's ready, it might take 3-5 minutes.
 
-> NOTE: Add a `--max-idle 3600s` to the command above if you will store your notebooks in the Dataproc staging bucket, and have the data loaded in a personal GCS Bucket.
+> NOTE: Add a `--max-idle 3600s` to the command above if you will store your notebooks in the Dataproc staging bucket, and have the data loaded in a personal GCS Bucket. This will terminate your cluster after 1 hr of being idle, keeping you on budget.
 
 - Once you get back control at the prompt, run this command and click on the link to open your Jupyter Lab web interface.
 ```
