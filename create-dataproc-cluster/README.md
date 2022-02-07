@@ -128,7 +128,7 @@ JAR_FILE = '/usr/lib/hadoop/hadoop-streaming-3.2.2.jar'
   ```
   - SSH into the VM using your Cloud Shell. It can also be done from your local terminal or Google Cloud SDK if running windows. Adjust the name of your instance if different.
   ```
-  gcloud compute ssh w261-m --ssh-flag "-L 8080:localhost:42229" --zone $REGION
+  gcloud compute ssh w261-m --ssh-flag "-L 8080:localhost:42229" --zone $ZONE
   ```
   - Click the `Web Preview` button at the top right in the Cloud Shell panel. We mapped this port to 8080, which is the default port number that `Web Preview` uses.
   - By default, Dataproc runs the Spark UI on port `42229`. Adjust accordingly if using a different port. In order to get the port number, open a new cell and run the variable `spark` (if SparkSession already established). You'll see the UI link. Hover over the link and get the port number.
