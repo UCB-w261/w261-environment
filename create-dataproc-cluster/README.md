@@ -75,7 +75,9 @@ gcloud dataproc clusters create w261 \
   --master-boot-disk-size 100 \
   --image-version 2.0-debian10 \
   --optional-components JUPYTER \
-  --project $GOOGLE_CLOUD_PROJECT
+  --project $GOOGLE_CLOUD_PROJECT \
+  --max-idle 3600s \
+  --async
 ```
 
 Wait a few minutes until it's ready, it might take 3-5 minutes.
