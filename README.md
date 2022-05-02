@@ -4,6 +4,7 @@
 ## Google Cloud Dataproc
 ### Overview
 ### Why Dataproc?
+### Redeem Credits on GCP
 ### Automated Orchestration using GCP CloudShell
 
 ## GitHub Repository
