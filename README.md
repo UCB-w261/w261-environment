@@ -29,6 +29,9 @@ Google offers $300 in credits for new accounts. Login to [GCP Console](https://c
 
 ### Automated Orchestration using GCP CloudShell
 For this Class, we will be using two automation scripts that will help us navigate through some complexity in the Cloud and Compute World.
+
+#### Instructions
+
 The first step is to open the [GCP Console](https://console.cloud.google.com), and click the terminal icon `>_` in the top blue bar.
 
 ![alt text](https://github.com/UCB-w261/w261-environment/blob/master/gcp-images/cloud_shell.png "Cloud Shell")
@@ -37,6 +40,7 @@ This will open a panel box at the bottom of the screen, and is your CloudShell. 
 
 Running the automated scripts on CloudShell guarantees having the appropriate dependencies, packages and the right environment.
 
+##### GCP Infrastructure Deployment
 The first script you need to run is to prepare a Google Project with all the artifacts needed to work in a secure environment with Dataproc. Please take a look at the documentation in [Create Dataproc Cluster](https://github.com/UCB-w261/w261-environment/edit/master/create-dataproc-cluster/README.md) to have a look inside of the orchestration under the covers.
 
 Please follow the prompts:
@@ -45,6 +49,7 @@ gsutil cat gs://w261-hw-data/w261_env.sh | bash -euo pipefail
 ```
 This script will take longer to run the first time. Once all the components are deployed, the subsequent runs will skip all orchestration and will create clusters on demand directly. Please run the script until you see in the prompts that a cluster was successfully created. You can safely delete this cluster as is missing the files from GitHub. Please navigate to [GCP Dataproc](https://console.cloud.google.com/dataproc/clusters) to delete it. If you don't see your cluster, switch to `w261-student` project in the top blue GCP bar. Remember you will be consuming credits on a per second basis. The orchestration that got put together had this in mind, and following best practices, $300 should be more than enough.
 
+##### GitHub Repositories
 The second script will take care of the repository cloning and pushing, GitHub account setup. It will also make sure Jupyter notebooks and other scripts are properly loaded into your Dataproc cluster. Have that GitHub token handy when running the first time.
 
 Please follow the prompts:
