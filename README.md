@@ -39,7 +39,7 @@ Running the automated scripts on CloudShell guarantees having the appropriate de
 
 The first script you need to run is to prepare a Google Project with all the artifacts needed to work in a secure environment with Dataproc. Please take a look at the documentation in [Create Dataproc Cluster](https://github.com/UCB-w261/w261-environment/edit/master/create-dataproc-cluster/README.md) to have a look inside of the orchestration under the covers.
 
-Please follow the propmts:
+Please follow the prompts:
 ```
 gsutil cat gs://w261-hw-data/w261_env.sh | bash -euo pipefail
 ```
@@ -47,7 +47,7 @@ This script will take longer to run the first time. Once all the components are 
 
 The second script will take care of the repository cloning and pushing, GitHub account setup. It will also make sure Jupyter notebooks and other scripts are properly loaded into your Dataproc cluster. Have that GitHub token handy when running the first time.
 
-Please follow the propmts:
+Please follow the prompts:
 ```
 gsutil cat gs://w261-hw-data/w261_github.sh | bash -euo pipefail
 ```
