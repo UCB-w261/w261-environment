@@ -91,7 +91,7 @@ JAR_FILE = '/usr/lib/hadoop/hadoop-streaming-3.2.2.jar'
   - The Spark UI for current jobs and Notebook can be accessed via SSH directly into the Master Node.
   - Open the Cloud Shell.
   - Get the zone where your Master node is located. Adjust the name of your instance. You can also assign the direct value if already known.
-  ```
+  ```bash
   ZONE=$(gcloud compute instances list --filter="name~w261" --format "value(zone)")
   ```
   - SSH into the VM using your Cloud Shell. It can also be done from your local terminal or Google Cloud SDK if running windows. Adjust the name of your instance if different.
