@@ -33,7 +33,7 @@ The first step is to open the [GCP Console](https://console.cloud.google.com), a
 
 ![alt text](https://github.com/UCB-w261/w261-environment/blob/master/gcp-images/cloud_shell.png "Cloud Shell")
 
-This will open a panel box at the bottom of the screen, and is your CloudShell. This is serverless compute, you are allocated 5 Gb of Storage, and is a great tool to act as a bridge for all the components we will be using in w261. From here, using the automation scripts, you will deploy clusters, load data into Buckets, pull code and push Homeworks to GitHub. The best part of CloudShell is that it's free.
+This will open a panel box at the bottom of the screen, and is your CloudShell. This is serverless compute, you are allocated 5 Gb of Storage, and is a great tool to act as a bridge for all the components we will be using in w261. From here, using the automation scripts, you will be able to deploy clusters, load data into Buckets, pull code and push Homeworks to GitHub. The best part of CloudShell is that it's free.
 
 Running the automated scripts on CloudShell guarantees having the appropriate dependencies, packages and the right environment.
 
