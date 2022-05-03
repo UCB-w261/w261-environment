@@ -63,12 +63,12 @@ Both scripts are meant to be run multiple times as you request an on-demand Data
 - Once you open JupyterLab, navigate to the root folder where you see to folders: `GCS` and `Local Disk`. We will work on `Local Disk` for HW1 and 2, and all first Labs before turning to Spark. The automation scripts make sure the files are properly loaded as long as you have run both scripts at least once. 
 
 - When working on a Notebook, get the full path where this notebook is located, and then add a new cell at the very top like this one:
-```
+```python
 %cd /full/path/to/the/notebook
 ```
 
 - To get the data for the HWs, add a new cell and comment the previous command that pulled the data such as `!curl`, `!wget` and similar, and obtain the data now from your GCS Data Bucket created in the first automation script:
-```
+```bash
 !mkdir -p data/
 !gsutil cp gs://<your-data-bucket>/main/Assignments/HW2/data/* data/
 ```
@@ -76,7 +76,7 @@ Feel free to explore where the data is for a specific HW with `gsutil ls gs://<y
 If you don't remember your GCS Data Bucket, run `gsutil ls` to get a list of Buckets in your account.
 
 - For Hadoop, the new location of the `JAR_FILE` is:
-```
+```python
 JAR_FILE = '/usr/lib/hadoop/hadoop-streaming-3.2.2.jar'
 ```
 
@@ -95,7 +95,7 @@ JAR_FILE = '/usr/lib/hadoop/hadoop-streaming-3.2.2.jar'
   ZONE=$(gcloud compute instances list --filter="name~w261" --format "value(zone)")
   ```
   - SSH into the VM using your Cloud Shell. It can also be done from your local terminal or Google Cloud SDK if running windows. Adjust the name of your instance if different.
-  ```
+  ```bash
   gcloud compute ssh w261-m --ssh-flag "-L 8080:localhost:42229" --zone $ZONE
   ```
   - Click the `Web Preview` button at the top right in the Cloud Shell panel. We mapped this port to 8080, which is the default port number that `Web Preview` uses.
