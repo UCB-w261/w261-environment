@@ -91,21 +91,20 @@ gcloud dataproc clusters describe w261 --region ${REGION} | grep JupyterLab
 
 ### Things to know
 
-- Once you open JupyterLab, navigate to the root folder where you see to folders: `GCS` and `Local Disk`. We will work on `Local Disk`.
-
-- Locate the `media` folder once you are in `Local Disk`, and clone the main repo in `Local Disk/media`. You can use the GitHub integration for JupyterLab or you can open a terminal inside Jupyter, change directory to `media` and then `git clone ...`
+- Once you open JupyterLab, navigate to the root folder where you see to folders: `GCS` and `Local Disk`. We will work on `Local Disk` for HW1 and 2, and all first Labs before turning to Spark. The automation scripts make sure the files are properly loaded as long as you have run both scripts at least once. 
 
 - When working on a Notebook, get the full path where this notebook is located, and then add a new cell at the very top like this one:
 ```
 %cd /full/path/to/the/notebook
 ```
 
-- To get the data for the HWs, add a new cell and comment the previous command that pulled the data such as `!curl`, `!wget` and similar, and obtain the data now from here:
+- To get the data for the HWs, add a new cell and comment the previous command that pulled the data such as `!curl`, `!wget` and similar, and obtain the data now from your GCS Data Bucket created in the first automation script:
 ```
 !mkdir -p data/
-!gsutil cp gs://w261-hw-data/main/Assignments/HW2/data/* data/
+!gsutil cp gs://<your-data-bucket>/main/Assignments/HW2/data/* data/
 ```
-Feel free to explore where the data is for a specific HW with `gsutil ls gs://w261-hw-data/main/Assignments/HW*`
+Feel free to explore where the data is for a specific HW with `gsutil ls gs://<your-data-bucket>/main/Assignments/HW*`
+If you don't remember your GCS Data Bucket, run `gsutil ls` to get a list of Buckets in your account.
 
 - For Hadoop, the new location of the `JAR_FILE` is:
 ```
