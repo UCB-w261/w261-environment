@@ -4,7 +4,7 @@ Welcome to `w261 - Machine Learning at Scale`. In this Class, on top of learning
 
 ## GitHub Repository
 ### Overview
-A read-only GitHub repository will be used as a source of code for Homeworks and Live Session Labs. You will also create a private personal repository for submitting your homeworks and final project.
+A read-only GitHub repository will be used as a source of code for Homeworks and Live Session Labs.
 
 ### Obtain GitHub Personal Token
 While authenticated to GitHub, please navigate to [github/personal_tokens](https://github.com/settings/tokens) to obtain one. You will need it for the automatization script mentioned below. Add a note such as `w261 GCP` or similar to keep track of this token. Lastly, check the box on `repo` which provides full control of private repositories, automatically all the underneath boxes are shown as checked.
