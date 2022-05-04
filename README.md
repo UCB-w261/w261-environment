@@ -6,18 +6,12 @@ Welcome to `w261 - Machine Learning at Scale`. In this Class, on top of learning
 ### Overview
 A read-only GitHub repository will be used as a source of code for Homeworks and Live Session Labs. You will also create a private personal repository for submitting your homeworks and final project.
 
-### Creating Personal Repository
-Please subscribe to the following Slack channels where instructions and link to GitHub Classroom will be provided to create your personal private repo:
-- data-sci-261-2022-summer-announcements
-- data-sci-261-2022-summer-main
-- data-sci-261-2022-summer-infrastructure
-
 ### Obtain GitHub Personal Token
 While authenticated to GitHub, please navigate to [github/personal_tokens](https://github.com/settings/tokens) to obtain one. You will need it for the automatization script mentioned below. Add a note such as `w261 GCP` or similar to keep track of this token. Lastly, check the box on `repo` which provides full control of private repositories, automatically all the underneath boxes are shown as checked.
 
 ## Google Cloud
 ### Overview
-Google Cloud is a top state of the art platform for Big Data Analytics and Orchestration. The main service used in w261 is Dataproc which is the main Cloud API for orchestration of Big Data Hadoop and Spark clusters.
+Google Cloud is a top state of the art platform for Big Data Analytics and Orchestration. The service used in w261 is Dataproc which is the main Cloud API for orchestration of Big Data Hadoop and Spark clusters.
 
 ### Why Dataproc?
 Dataproc offers a plug-and-play kind of cluster orchestration for Hadoop and Spark. Jupyter Lab comes out of the box using the GoogleUserContent front-end which is highly secure, and prevents us from exposing our VM with an external IP address.
@@ -28,35 +22,28 @@ Google offers $300 in credits for new accounts. Login to [GCP Console](https://c
 *Note: Acepting this offer involves providing a credit card that will not be charged immediately after credits deplete. You will have an opportunity to decide to continue before GCP charging your credit card.*
 
 ### Automated Orchestration using GCP CloudShell
-For this Class, we will be using two automation scripts that will help us navigate through some complexity in the Cloud and Compute World.
+For this Class, we will be using a single automation script that will help us navigate through some complexity in the Cloud and Compute World.
 
 The first step is to open the [GCP Console](https://console.cloud.google.com), and click the terminal icon `>_` in the top blue bar.
 
 <img src="https://github.com/UCB-w261/w261-environment/blob/master/gcp-images/cloud_shell.png" width="600">
 
-This will open a panel box at the bottom of the screen, and is your CloudShell. This is serverless compute, you are allocated 5 Gb of Storage, and is a great tool to act as a bridge for all the components we will be using in w261. From here, using the automation scripts, you will be able to deploy clusters, load data into Buckets, pull code and push Homeworks to GitHub. The best part of CloudShell is that it's free.
+This will open a panel box at the bottom of the screen, and is your CloudShell. This is serverless compute, you are allocated 5 Gb of Storage, and is a great tool to act as a bridge for all the components we will be using in w261. From here, using the automation script, you will be able to deploy clusters, load data into Buckets and pull code from the [Main Repo](https://github.com/UCB-w261/main.git). The best part of CloudShell is that it's free.
 
-Running the automated scripts on CloudShell guarantees having the appropriate dependencies, packages and the right environment.
+Running the automated script on CloudShell guarantees having the appropriate dependencies, packages and the right environment.
 
 ### GCP Infrastructure Deployment
-The first script you need to run is to prepare a Google Project with all the artifacts needed to work in a secure environment with Dataproc. Please take a look at the documentation in [Create Dataproc Cluster](https://github.com/UCB-w261/w261-environment/edit/master/create-dataproc-cluster/README.md) to have a look inside of the orchestration under the covers.
+The script you need to run is to prepare a Google Project with all the artifacts needed to work in a secure environment with Dataproc. Please take a look at the documentation in [Create Dataproc Cluster](https://github.com/UCB-w261/w261-environment/edit/master/create-dataproc-cluster/README.md) to have a look inside of the orchestration under the covers.
 
 Please follow the prompts:
 ```bash
 gsutil cat gs://w261-hw-data/w261_env.sh | bash -euo pipefail
 ```
-This script will take longer to run the first time. Once all the components are deployed, the subsequent runs will skip all orchestration and will create clusters on demand directly. Please run the script until you see in the prompts that a cluster was successfully created. You can safely delete this cluster as is missing the files from GitHub. Please navigate to [GCP Dataproc](https://console.cloud.google.com/dataproc/clusters) to delete it. If you don't see your cluster, switch to `w261-student` project in the top blue GCP bar. Remember you will be consuming credits on a per second basis. The orchestration that got put together had this in mind, and following best practices, $300 should be more than enough.
+This script will take longer to run the first time before you have deployed any cluster. Once all the components are deployed, the subsequent runs will skip all orchestration and will create clusters on demand directly. Although, It will always check for all components to be installed. Please run the script again until you see in the prompts that a cluster was successfully created. 
 
-### GitHub Repositories
-The second script will take care of the repository cloning and pushing, GitHub account setup. It will also make sure Jupyter notebooks and other scripts are properly loaded into your Dataproc cluster. Have that GitHub token handy when running the first time.
+You can see your clusters in [GCP Dataproc](https://console.cloud.google.com/dataproc/clusters). If you don't see your cluster, switch to `w261-student` project in the top blue GCP bar. Remember you will be consuming credits on a per second basis. The orchestration that got put together had this in mind, and following best practices, $300 should be more than enough.
 
-Please follow the prompts:
-```bash
-gsutil cat gs://w261-hw-data/w261_github.sh | bash -euo pipefail
-```
-This script will take longer to run the first time because of repository cloning. Subsequent runs will only pull from read-only source code, push changes to your personal repo or replace token.
-
-Both scripts are meant to be run multiple times as you request an on-demand Dataproc cluster and when needing to pull or push to Github.
+It's up to you if you want to delete it directly or let the `max-idle` feature hit in (you will select that every time you create a cluster: 1h, 2h, 3h, 6h, 12h, 24h).
 
 ### Things to know
 
