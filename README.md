@@ -1,13 +1,13 @@
 # w261 Environment
 ## Overview
-Welcome to `w261 - Machine Learning at Scale`. In this Class, on top of learning about the Machine Learning models in the industry, you will be using production grade technology and infrastructure deployment best practices. About two thirds of the class, you will be using an environment orchestration in Google Cloud. The last third, you will get the opportunity to use Databricks on Azure.
+Welcome to `w261 - Machine Learning at Scale`. In this class, on top of learning about the Machine Learning models in the industry, you will be using production grade technology and infrastructure deployment best practices. For about two thirds of the class, you will be using an environment orchestration in Google Cloud. For the last third, you will get the opportunity to use Databricks on Azure.
 
 ## GitHub Repository
 ### Overview
-A read-only GitHub repository will be used as a source of code for Homeworks and Live Session Labs.
+A read-only GitHub repository will be used as a source of code for Homework and Live Session Labs.
 
 ### Obtain GitHub Personal Token
-While authenticated to GitHub, please navigate to [github/personal_tokens](https://github.com/settings/tokens) to obtain one. You will need it for the automatization script mentioned below. Add a note such as `w261 GCP` or similar to keep track of this token. Lastly, check the box on `repo` which provides full control of private repositories, automatically all the underneath boxes are shown as checked.
+While authenticated to GitHub, please navigate to [github/personal_tokens](https://github.com/settings/tokens) to obtain one. You will need it for the automatization script mentioned below. Add a note such as `w261 GCP` or similar to keep track of this token. Lastly, check the box on `repo` which provides full control of private repositories, automatically all the underneath boxes are shown as checked.  Please, be aware that you will only be able to see and copy this code once, so you may want to save a local copy of it on your local Windows/Mac machine.
 
 ## Google Cloud
 ### Overview
@@ -28,18 +28,18 @@ The first step is to open the [GCP Console](https://console.cloud.google.com), a
 
 <img src="https://github.com/UCB-w261/w261-environment/blob/master/gcp-images/cloud_shell.png" width="600">
 
-This will open a panel box at the bottom of the screen, and is your CloudShell. This is serverless compute, you are allocated 5 Gb of Storage, and is a great tool to act as a bridge for all the components we will be using in w261. From here, using the automation script, you will be able to deploy clusters, load data into Buckets and pull code from the [Main Repo](https://github.com/UCB-w261/main.git). The best part of CloudShell is that it's free.
+This will open a panel box at the bottom of the screen, which is your CloudShell. This is serverless compute, you are allocated 5 GB of Storage, and is a great tool to act as a bridge for all the components we will be using in w261. From here, using the automation script, you will be able to deploy clusters, load data into Buckets and pull code from the [Main Repo](https://github.com/UCB-w261/main.git). The best part of CloudShell is that it's free.
 
 Running the automated script on CloudShell guarantees having the appropriate dependencies, packages and the right environment.
 
 ### GCP Infrastructure Deployment
-The script you need to run is to prepare a Google Project with all the artifacts needed to work in a secure environment with Dataproc. Please take a look at the documentation in [Create Dataproc Cluster](https://github.com/UCB-w261/w261-environment/edit/master/create-dataproc-cluster/README.md) to have a look inside of the orchestration under the covers.
+The script you need to run is to prepare a Google Project with all the artifacts needed to work in a secure environment with Dataproc. Please take a look at the documentation in [Create Dataproc Cluster](https://github.com/UCB-w261/w261-environment/blob/master/create-dataproc-cluster/README.md) to have a look inside of the orchestration under the covers.
 
 Please follow the prompts:
 ```bash
 gsutil cat gs://w261-hw-data/w261_env.sh | bash -euo pipefail
 ```
-This script will take longer to run the first time before you have deployed any cluster. Once all the components are deployed, the subsequent runs will skip all orchestration and will create clusters on demand directly. Although, It will always check for all components to be installed. Please run the script again until you see in the prompts that a cluster was successfully created. 
+This script will take longer to run the first time before you have deployed any cluster. Once all the components are deployed, the subsequent runs will skip all orchestration and will create clusters on demand directly. Although, it will always check for all components to be installed. To run the script, follow the prompts; after you run the command line above, press Q to exit the Welcome screen and begin running the actual script.  You will have the respond `y` to the first question (`Do you want to proceed?`) and then respond to some of the following questions.  Please run the script again until you see in the prompts that a cluster was successfully created.
 
 You can see your clusters in [GCP Dataproc](https://console.cloud.google.com/dataproc/clusters). If you don't see your cluster, switch to `w261-student` project in the top blue GCP bar. Remember you will be consuming credits on a per second basis. The orchestration that got put together had this in mind, and following best practices, $300 should be more than enough.
 
@@ -47,7 +47,7 @@ It's up to you if you want to delete it directly or let the `max-idle` feature h
 
 ### Things to know
 
-- Once you open JupyterLab, navigate to the root folder where you see to folders: `GCS` and `Local Disk`. We will work on `Local Disk` for HW1 and 2, and all first Labs before turning to Spark. The automation scripts make sure the files are properly loaded as long as you have run both scripts at least once. 
+- Once you open JupyterLab, navigate to the root folder where you see to folders: `GCS` and `Local Disk`. We will work on `Local Disk` for HW1 and 2, and all first Labs before turning to Spark. The automation scripts make sure the files are properly loaded as long as you have run both scripts at least once.
 
 - When working on a Notebook, get the full path where this notebook is located, and then add a new cell at the very top like this one:
 ```python
@@ -88,4 +88,3 @@ JAR_FILE = '/usr/lib/hadoop/hadoop-streaming-3.2.2.jar'
   - Click the `Web Preview` button at the top right in the Cloud Shell panel. We mapped this port to 8080, which is the default port number that `Web Preview` uses.
   - By default, Dataproc runs the Spark UI on port `42229`. Adjust accordingly if using a different port. In order to get the port number, open a new cell and run the variable `spark` (if SparkSession already established). You'll see the UI link. Hover over the link and get the port number.
   - Keep the Cloud Shell alive by running `sleep 1800`, or a number you feel comfortable to keep the tunnel open.
-  
