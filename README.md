@@ -47,7 +47,7 @@ It's up to you if you want to delete it directly or let the `max-idle` feature h
 
 ### Things to know
 
-- Once you open JupyterLab, navigate to the root folder where you see to folders: `GCS` and `Local Disk`. We will work on `Local Disk` for HW1 and 2, and all first Labs before turning to Spark. The automation scripts make sure the files are properly loaded as long as you have run both scripts at least once.
+- Once you open JupyterLab, navigate to the root folder where you see to folders: `GCS` and `Local Disk`. We will work on `Local Disk` for HW1 and 2, and all first Labs before turning to Spark. The automation script make sure the files are properly loaded as long as you have run the script at least once.
 
 - When working on a Notebook, get the full path where this notebook is located, and then add a new cell at the very top like this one:
 ```python
