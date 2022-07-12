@@ -1,0 +1,20 @@
+digraph Tree {
+node [shape=box] ;
+0 [label="X[2] <= 0.892\nmse = 7799.762\nsamples = 18\nvalue = -26.146"] ;
+1 [label="X[1] <= 1.387\nmse = 3859.17\nsamples = 16\nvalue = -49.2"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+3 [label="X[2] <= 0.26\nmse = 2382.285\nsamples = 14\nvalue = -64.935"] ;
+1 -> 3 ;
+5 [label="X[2] <= -1.315\nmse = 837.555\nsamples = 12\nvalue = -81.04"] ;
+3 -> 5 ;
+7 [label="mse = 355.473\nsamples = 3\nvalue = -123.475"] ;
+5 -> 7 ;
+8 [label="mse = 197.909\nsamples = 9\nvalue = -66.895"] ;
+5 -> 8 ;
+6 [label="mse = 757.621\nsamples = 2\nvalue = 31.692"] ;
+3 -> 6 ;
+4 [label="mse = 331.73\nsamples = 2\nvalue = 60.947"] ;
+1 -> 4 ;
+2 [label="mse = 1058.268\nsamples = 2\nvalue = 158.284"] ;
+0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+}
